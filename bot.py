@@ -1,60 +1,37 @@
-from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes
+import telebot
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
-# ⚠️ আপনার বটের টোকেন এবং এডমিন আইডি এখানে বসান
-TOKEN = '8843728925:AAF3tV-sNF8ooJ0CCAkPcQ8Bqe03sHx7IwU'
-ADMIN_ID = 7588246972 
+# আপনার বটের আসল টোকেনটি এখানে বসাবেন
+BOT_TOKEN = "8843728925:AAF3tV-sNF8ooJ0CCAkPcQ8Bqe03sHx7IwU"
 
-REFERRAL_STATUS = True
-user_data = {}
+bot = telebot.TeleBot(BOT_TOKEN)
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global REFERRAL_STATUS
-    user_id = update.effective_user.id
-    user_name = update.effective_user.first_name
+# আপনার গিটহাব পেজের লাইভ লিংক
+WEB_APP_URL = "https://hossanali567775-lang.github.io/Refer-Earn-Zone/"
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    chat_id = message.chat.id
+    user_name = message.from_user.first_name
     
-    if user_id not in user_data:
-        user_data[user_id] = {'points': 0, 'referred_by': None, 'refer_count': 0}
+    # স্বাগত বার্তা
+    welcome_text = (
+        f"👋 আসসালামু আলাইকুম, {user_name}!\n\n"
+        f"আমাদের **Earn Zone** মিনি অ্যাপ বোটে আপনাকে স্বাগতম। "
+        f"নিচের বোতামে ক্লিক করে অ্যাপটি ওপেন করুন এবং টাস্ক ও অ্যাড দেখে ইনকাম শুরু করুন!"
+    )
     
-    if context.args and REFERRAL_STATUS:
-        referrer_id = int(context.args[0])
-        if referrer_id != user_id and user_data[user_id]['referred_by'] is None:
-            user_data[user_id]['referred_by'] = referrer_id
-            if referrer_id in user_data:
-                user_data[referrer_id]['points'] += 10
-                user_data[referrer_id]['refer_count'] += 1
-                try:
-                    await context.bot.send_message(chat_id=referrer_id, text=f"🎉 অভিনন্দন! {user_name} আপনার লিংকে জয়েন করেছে। আপনি ১০ পয়েন্ট পেয়েছেন!")
-                except: pass
-    elif context.args and not REFERRAL_STATUS:
-        await update.message.reply_text("⚠️ দুঃখিত, বর্তমানে রেফারেল সিস্টেমটি বন্ধ আছে।")
-
-    bot_username = context.bot.username
-    ref_link = f"https://t.me/{bot_username}?start={user_id}"
-    status_text = "🟢 ওপেন (Open)" if REFERRAL_STATUS else "🔴 বন্ধ (Closed)"
+    # ইন্টারলাইন কিবোর্ড বাটন তৈরি (ওয়েব অ্যাপের সাথে কানেক্টেড)
+    markup = InlineKeyboardMarkup()
+    open_app_btn = InlineKeyboardButton(
+        text="📱 Open App", 
+        web_app=WebAppInfo(url=WEB_APP_URL)
+    )
+    markup.add(open_app_btn)
     
-    welcome_text = f"👋 স্বাগতম {user_name} আমাদের Refer Earn Zone বটে!\n\n📢 স্ট্যাটাস: {status_text}\n🔗 লিংক:\n{ref_link}\n\n👥 মোট রেফার: {user_data[user_id]['refer_count']} জন\n💰 মোট পয়েন্ট: {user_data[user_id]['points']} Points"
-    await update.message.reply_text(welcome_text)
+    # ইউজারকে মেসেজ পাঠানো
+    bot.send_message(chat_id, welcome_text, reply_markup=markup, parse_mode="Markdown")
 
-async def control_panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    global REFERRAL_STATUS
-    if update.effective_user.id != ADMIN_ID:
-        await update.message.reply_text("❌ আপনি এডমিন নন!")
-        return
-    if context.args:
-        command = context.args[0].lower()
-        if command == "open":
-            REFERRAL_STATUS = True
-            await update.message.reply_text("🟢 রেফারেল সিস্টেম OPEN করা হয়েছে!")
-        elif command == "close":
-            REFERRAL_STATUS = False
-            await update.message.reply_text("🔴 রেফারেল সিস্টেম CLOSE করা হয়েছে!")
-    else:
-        current_status = "🟢 Open" if REFERRAL_STATUS else "🔴 Close"
-        await update.message.reply_text(f"ℹ️ বর্তমানে সিস্টেম {current_status} আছে।")
-
-if __name__ == '__main__':
-    app = Application.builder().token(TOKEN).build()
-    app.add_handler(CommandHandler('start', start))
-    app.add_handler(CommandHandler('control', control_panel))
-    app.run_polling()
+if __name__ == "__main__":
+    print("Бот запущен... (بট চালু হয়েছে...)")
+    bot.infinity_polling()
