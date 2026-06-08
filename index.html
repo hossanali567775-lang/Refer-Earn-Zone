@@ -1,1 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earn Zone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            background-color: #0b0914;
+            color: #ffffff;
+            padding: 20px;
+            padding-bottom: 90px;
+        }
+
+        /* Header Style */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #bd24df, #5311b1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Balance Card */
+        .balance-card {
+            background: linear-gradient(180deg, #161229, #0f0c1b);
+            border: 1px solid #221a3d;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .balance-title {
+            color: #7b7593;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .balance-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: #f1c40f;
+            margin: 10px 0;
+        }
+
+        .balance-sub {
+            color: #534e66;
+            font-size: 12px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: #120e22;
+            border: 1px solid #1c1635;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #534e66;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background-color: #bd24df;
+            border-radius: 2px;
+        }
+
+        /* Task List Style */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .task-item {
+            background: #131024;
+            border: 1px solid #1f193a;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .task-item:hover {
+            background: #191530;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-icon {
+            font-size: 20px;
+            background: #1c1735;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .task-reward {
+            font-size: 11px;
+            color: #7b7593;
+            margin-top: 3px;
+        }
+
+        .task-reward span {
+            color: #a855f7;
+        }
+
+        .task-arrow {
+            color: #534e66;
+            font-size: 16px;
+        }
+
+        /* Ad Slots Grid */
+        .ad-slots {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .ad-box {
+            background: #131024;
+            border: 1px solid #1f193a;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .ad-box-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .ad-box-title {
+            font-size: 12px;
+            color: #7b7593;
+            text-transform: uppercase;
+        }
+
+        .ad-box-reward {
+            font-size: 15px;
+            font-weight: bold;
+            color: #bd24df;
+            margin: 5px 0;
+        }
+
+        .ad-box-limit {
+            font-size: 10px;
+            color: #443f54;
+        }
+
+        /* Daily Task Style with Button */
+        .daily-task-item {
+            background: #131024;
+            border: 1px solid #1f193a;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .task-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #110e20;
+            border-top: 1px solid #1e1938;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #534e66;
+            font-size: 10px;
+            text-decoration: none;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #8b5cf6;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div class="logo">⚡ Earn Zone</div>
+        <div class="avatar" id="userAvatar">A</div>
+    </div>
+
+    <!-- Balance Card Section -->
+    <div class="balance-card">
+        <div class="balance-title">Your Balance</div>
+        <div class="balance-amount">৳<span id="userBalance">60.00</span></div>
+        <div class="balance-sub">Available to withdraw</div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value" id="todayEarn">0</div>
+                <div class="stat-label">Today</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="totalAds">0</div>
+                <div class="stat-label">Total Ads</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="totalRefers">0</div>
+                <div class="stat-label">Refers</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Tasks Section -->
+    <div class="section-title">Official Tasks</div>
+    <div class="task-list">
+        <div class="task-item" onclick="completeTask('group', 10)">
+            <div class="task-info">
+                <div class="task-icon">📢</div>
+                <div>
+                    <div class="task-name">সাপোর্ট গ্রুপে জয়েন করুন</div>
+                    <div class="task-reward">Completed (<span>৳১০ Claimed</span>)</div>
+                </div>
+            </div>
+            <div class="task-arrow">➔</div>
+        </div>
+
+        <div class="task-item" onclick="completeTask('channel', 10)">
+            <div class="task-info">
+                <div class="task-icon">💬</div>
+                <div>
+                    <div class="task-name">পেমেন্ট চ্যানেল জয়েন করুন</div>
+                    <div class="task-reward">Completed (<span>৳১০ Claimed</span>)</div>
+                </div>
+            </div>
+            <div class="task-arrow">➔</div>
+        </div>
+
+        <div class="task-item" onclick="openTutorial()">
+            <div class="task-info">
+                <div class="task-icon">🎬</div>
+                <div>
+                    <div class="task-name">কীভাবে কাজ করবেন?</div>
+                    <div class="task-reward" style="color: #f1c40f;">ভিডিও টিউটোরিয়াল</div>
+                </div>
+            </div>
+            <div class="task-arrow">➔</div>
+        </div>
+    </div>
+
+    <!-- Ad Slots Section -->
+    <div class="section-title">Ad Slots (Interstitials)</div>
+    <div class="ad-slots">
+        <div class="ad-box" onclick="watchAd('slot1', 10)">
+            <div class="ad-box-icon">⚡</div>
+            <div class="ad-box-title">Slot 1</div>
+            <div class="ad-box-reward">+৳১০</div>
+            <div class="ad-box-limit">Used: 0/10</div>
+        </div>
+        <div class="ad-box" onclick="watchAd('slot2', 15)">
+            <div class="ad-box-icon">🔥</div>
+            <div class="ad-box-title">Slot 2</div>
+            <div class="ad-box-reward">+৳১৫</div>
+            <div class="ad-box-limit">Used: 0/10</div>
+        </div>
+    </div>
+
+    <!-- Daily Tasks Section -->
+    <div class="section-title">Daily Tasks (15s Timer)</div>
+    <div class="task-list">
+        <div class="daily-task-item">
+            <div class="task-info">
+                <div class="task-icon">📺</div>
+                <div>
+                    <div class="task-name">ad 1</div>
+                    <div class="task-reward" style="color:#bd24df;">+৳১০</div>
+                </div>
+            </div>
+            <button class="task-btn" onclick="startDailyTask(1)">টাস্ক</button>
+        </div>
+
+        <div class="daily-task-item">
+            <div class="task-info">
+                <div class="task-icon">📺</div>
+                <div>
+                    <div class="task-name">ad 2</div>
+                    <div class="task-reward" style="color:#bd24df;">+৳১০</div>
+                </div>
+            </div>
+            <button class="task-btn" onclick="startDailyTask(2)">টাস্ক</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Footer -->
+    <div class="footer-nav">
+        <a class="nav-item active">
+            <span>🏠</span>
+            <div>HOME</div>
+        </a>
+        <a class="nav-item" onclick="alert('Refer Link Copied!')">
+            <span>👥</span>
+            <div>REFER</div>
+        </a>
+        <a class="nav-item" onclick="alert('Minimum Withdraw ৳50')">
+            <span>💰</span>
+            <div>WITHDRAW</div>
+        </a>
+        <a class="nav-item">
+            <span>👤</span>
+            <div>PROFILE</div>
+        </a>
+    </div>
+
+    <!-- Simple JavaScript App Logic -->
+    <script>
+        let balance = 60.00;
+
+        function watchAd(slot, reward) {
+            alert("Ad loading... Please wait 15 seconds.");
+            setTimeout(() => {
+                balance += reward;
+                document.getElementById('userBalance').innerText = balance.toFixed(2);
+                alert("Success! ৳" + reward + " added to your balance.");
+            }, 2000); // আপাতত টেস্ট করার জন্য ২ সেকেন্ড টায়রা রাখা হয়েছে
+        }
+
+        function startDailyTask(id) {
+            alert("Starting Daily Task " + id);
+        }
+
+        function completeTask(type, reward) {
+            alert("Opening social link...");
+        }
+
+        function openTutorial() {
+            alert("Opening YouTube Video Tutorial...");
+        }
+    </script>
+</body>
+</html>
