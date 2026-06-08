@@ -5,87 +5,319 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Zone</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #0b0914; color: #ffffff; padding: 20px; padding-bottom: 90px; }
-        
-        /* Header */
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .logo { font-size: 26px; font-weight: bold; color: #ffcc00; text-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
-        .avatar { width: 45px; height: 45px; background: #ffcc00; color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0b0914;
+            color: #ffffff;
+            padding: 20px;
+            padding-bottom: 90px;
+        }
+
+        /* Header Style */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #bd24df, #5311b1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
         /* Balance Card */
-        .balance-card { background: linear-gradient(135deg, #1c1a2e, #0b0914); border: 2px solid #ffcc00; border-radius: 20px; padding: 25px; text-align: center; margin-bottom: 30px; box-shadow: 0 0 20px rgba(255, 204, 0, 0.2); }
-        .balance-amount { font-size: 40px; font-weight: 800; color: #ffcc00; }
-        .balance-sub { color: #aaa; font-size: 14px; margin-top: 5px; }
-        
-        /* Section */
-        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: #ffcc00; }
-        .task-list { display: flex; flex-direction: column; gap: 12px; }
-        .task-item { background: #1a172a; border: 1px solid #333; border-radius: 15px; padding: 18px; display: flex; align-items: center; justify-content: space-between; }
-        
-        /* Buttons */
-        .task-btn { background: #ffcc00; color: #000; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        .footer-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #1a172a; border-top: 2px solid #ffcc00; display: flex; justify-content: space-around; padding: 15px 0; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: #ffcc00; font-size: 12px; cursor: pointer; }
+        .balance-card {
+            background: linear-gradient(180deg, #161229, #0f0c1b);
+            border: 1px solid #221a3d;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(189, 36, 223, 0.15);
+        }
+
+        .balance-title {
+            color: #7b7593;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .balance-amount {
+            font-size: 38px;
+            font-weight: 800;
+            color: #f1c40f;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+        }
+
+        .balance-sub {
+            color: #534e66;
+            font-size: 12px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background-color: #bd24df;
+            border-radius: 2px;
+        }
+
+        /* Task List Style */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .task-item {
+            background: #131024;
+            border: 1px solid #1f193a;
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .task-icon {
+            font-size: 20px;
+            background: #1c1735;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .task-reward {
+            font-size: 11px;
+            color: #7b7593;
+            margin-top: 3px;
+        }
+
+        /* Button Style */
+        .task-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+            transition: 0.2s;
+        }
+
+        .task-btn:hover {
+            background: #7c3aed;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #110e20;
+            border-top: 1px solid #1e1938;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #534e66;
+            font-size: 11px;
+            text-decoration: none;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #8b5cf6;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <div class="header">
-        <div class="logo">Earn Zone</div>
+        <div class="logo">⚡ Earn Zone</div>
         <div class="avatar">U</div>
     </div>
 
+    <!-- Balance Card Section -->
     <div class="balance-card">
+        <div class="balance-title">Your Balance</div>
         <div class="balance-amount">৳<span id="userBalance">0.00</span></div>
-        <div class="balance-sub">আপনার বর্তমান ব্যালেন্স</div>
+        <div class="balance-sub">Available to withdraw</div>
     </div>
 
+    <!-- Daily Tasks Section -->
     <div class="section-title">ডেইলি টাস্ক</div>
     <div class="task-list">
         <div class="task-item">
-            <div>সাপোর্ট গ্রুপে জয়েন করুন</div>
+            <div class="task-info">
+                <div class="task-icon">📢</div>
+                <div>
+                    <div class="task-name">সাপোর্ট গ্রুপে জয়েন করুন</div>
+                    <div class="task-reward"><span id="groupStatus">টাস্কটি অসম্পূর্ণ</span></div>
+                </div>
+            </div>
             <button class="task-btn" onclick="completeTask('group', 10)">টাস্ক</button>
         </div>
+
         <div class="task-item">
-            <div>পেমেন্ট চ্যানেল জয়েন করুন</div>
+            <div class="task-info">
+                <div class="task-icon">💬</div>
+                <div>
+                    <div class="task-name">পেমেন্ট চ্যানেল জয়েন করুন</div>
+                    <div class="task-reward"><span id="channelStatus">টাস্কটি অসম্পূর্ণ</span></div>
+                </div>
+            </div>
             <button class="task-btn" onclick="completeTask('channel', 10)">টাস্ক</button>
         </div>
+
         <div class="task-item">
-            <div>অফার ১ (Ads)</div>
+            <div class="task-info">
+                <div class="task-icon">📺</div>
+                <div>
+                    <div class="task-name">অফার ১ (Ads)</div>
+                    <div class="task-reward" style="color:#bd24df;">+৳১০</div>
+                </div>
+            </div>
             <button class="task-btn" onclick="watchAd(10)">টাস্ক</button>
         </div>
     </div>
 
+    <!-- Bottom Navigation Footer -->
     <div class="footer-nav">
-        <div class="nav-item">🏠 HOME</div>
-        <div class="nav-item" onclick="alert('রেফার লিংক কপি হয়েছে!')">👥 REFER</div>
-        <div class="nav-item" onclick="alert('ন্যূনতম ৫০ টাকা প্রয়োজন')">💰 WITHDRAW</div>
+        <a class="nav-item active">
+            <span>🏠</span>
+            <div>HOME</div>
+        </a>
+        <a class="nav-item" onclick="alert('আপনার রেফারেল লিংক কপি হয়েছে!')">
+            <span>👥</span>
+            <div>REFER</div>
+        </a>
+        <a class="nav-item" onclick="triggerWithdraw()">
+            <span>💰</span>
+            <div>WITHDRAW</div>
+        </a>
     </div>
 
+    <!-- লজিক এবং লিংকের কোড -->
     <script>
-        const monetagLink = "আপনার_মোনেটাগ_লিংক";
-        const groupLink = "আপনার_গ্রুপ_লিংক";
-        const channelLink = "আপনার_চ্যানেল_লিংক";
+        // আপনার মোনেটাগ এবং টেলিগ্রাম লিংকগুলো এখানে বসাবেন
+        const monetagLink = "আপনার_মোনেটাগ_লিংক_এখানে_দিন";
+        const groupLink = "আপনার_গ্রুপ_লিংক_এখানে_দিন";
+        const channelLink = "আপনার_চ্যানেল_লিংক_এখানে_দিন";
 
         let userBalance = parseFloat(localStorage.getItem('balance')) || 0.00;
-        
-        function updateUI() { document.getElementById('userBalance').innerText = userBalance.toFixed(2); }
+        let isGroupJoined = localStorage.getItem('isGroupJoined') === 'true';
+        let isChannelJoined = localStorage.getItem('isChannelJoined') === 'true';
+
+        function updateUI() {
+            document.getElementById('userBalance').innerText = userBalance.toFixed(2);
+            if(isGroupJoined) {
+                document.getElementById('groupStatus').innerHTML = "Completed (<span style='color:#a855f7;'>৳১০ Claimed</span>)";
+            }
+            if(isChannelJoined) {
+                document.getElementById('channelStatus').innerHTML = "Completed (<span style='color:#a855f7;'>৳১০ Claimed</span>)";
+            }
+        }
 
         function watchAd(reward) {
+            alert("বিজ্ঞাপন লোড হচ্ছে... সম্পূর্ণ দেখে ব্যাক করুন।");
             window.open(monetagLink, "_blank");
-            userBalance += reward;
-            localStorage.setItem('balance', userBalance);
-            updateUI();
+            
+            setTimeout(() => {
+                userBalance += reward;
+                localStorage.setItem('balance', userBalance);
+                updateUI();
+                alert("সফল! আপনার ব্যালেন্সে ৳" + reward + " যোগ করা হয়েছে।");
+            }, 1000);
         }
 
         function completeTask(type, reward) {
-            if(type === 'group') { window.open(groupLink, "_blank"); }
-            else if(type === 'channel') { window.open(channelLink, "_blank"); }
+            if (type === 'group') {
+                if (isGroupJoined) { alert("আপনি এই টাস্কটি অলরেডি করেছেন!"); return; }
+                window.open(groupLink, "_blank");
+                isGroupJoined = true;
+                localStorage.setItem('isGroupJoined', 'true');
+            } else if (type === 'channel') {
+                if (isChannelJoined) { alert("আপনি এই টাস্কটি অলরেডি করেছেন!"); return; }
+                window.open(channelLink, "_blank");
+                isChannelJoined = true;
+                localStorage.setItem('isChannelJoined', 'true');
+            }
+            
             userBalance += reward;
             localStorage.setItem('balance', userBalance);
             updateUI();
         }
+
+        function triggerWithdraw() {
+            if(userBalance < 50) {
+                alert("দুঃখিত! টাকা তোলার জন্য ন্যূনতম ৫০ টাকা ব্যালেন্স প্রয়োজন। আপনার বর্তমান ব্যালেন্স: ৳" + userBalance.toFixed(2));
+            } else {
+                alert("টাকা তোলার রিকোয়েস্ট এডমিনের কাছে পাঠানো হয়েছে।");
+            }
+        }
+
         updateUI();
     </script>
 </body>
