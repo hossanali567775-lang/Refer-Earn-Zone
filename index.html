@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earn Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,200 +14,240 @@
         }
 
         body {
-            background-color: #0b0914;
+            background-color: #060213;
             color: #ffffff;
             padding: 20px;
-            padding-bottom: 90px;
+            padding-bottom: 100px;
+            overflow-x: hidden;
         }
 
-        /* Header Style */
+        /* Top Header Area */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 0 5px;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #d63384;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffcc00, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
         }
 
         .avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #bd24df, #5311b1);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #060213;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
         }
 
-        /* Balance Card */
+        /* Premium Glowing Golden Balance Card */
         .balance-card {
-            background: linear-gradient(180deg, #161229, #0f0c1b);
-            border: 1px solid #221a3d;
-            border-radius: 20px;
-            padding: 25px;
+            background: linear-gradient(180deg, rgba(35, 28, 15, 0.8), rgba(15, 12, 5, 0.9));
+            border: 1px solid rgba(255, 204, 0, 0.25);
+            border-radius: 24px;
+            padding: 30px 20px;
             text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(189, 36, 223, 0.15);
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 204, 0, 0.08);
+        }
+
+        /* Glowing blur effect behind card */
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            border-radius: 30px;
         }
 
         .balance-title {
-            color: #7b7593;
-            font-size: 13px;
+            color: #94a3b8;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
         }
 
         .balance-amount {
-            font-size: 38px;
+            font-size: 46px;
             font-weight: 800;
-            color: #f1c40f;
-            margin: 10px 0;
-            text-shadow: 0 0 10px rgba(241, 196, 15, 0.3);
+            color: #facc15;
+            margin: 12px 0;
+            text-shadow: 0 0 25px rgba(250, 204, 21, 0.5);
+            letter-spacing: -1px;
         }
 
         .balance-sub {
-            color: #534e66;
-            font-size: 12px;
+            color: #64748b;
+            font-size: 13px;
+            font-weight: 500;
         }
 
-        /* Section Title */
+        /* Glowing Golden Section Label */
         .section-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: -0.3px;
         }
 
         .section-title::before {
             content: '';
             display: inline-block;
             width: 4px;
-            height: 16px;
-            background-color: #bd24df;
-            border-radius: 2px;
+            height: 18px;
+            background: linear-gradient(180deg, #ffcc00, #ff9900);
+            border-radius: 4px;
+            box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* Task List Style */
+        /* Premium Task Cards */
         .task-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 14px;
+            margin-bottom: 30px;
         }
 
         .task-item {
-            background: #131024;
-            border: 1px solid #1f193a;
-            border-radius: 15px;
-            padding: 15px;
+            background: rgba(26, 21, 10, 0.4);
+            border: 1px solid rgba(255, 204, 0, 0.06);
+            border-radius: 20px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
         }
 
         .task-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .task-icon {
-            font-size: 20px;
-            background: #1c1735;
-            padding: 10px;
-            border-radius: 12px;
+            font-size: 22px;
+            background: rgba(36, 28, 11, 0.8);
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255, 204, 0, 0.1);
         }
 
         .task-name {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             color: #ffffff;
+            margin-bottom: 4px;
         }
 
         .task-reward {
-            font-size: 11px;
-            color: #7b7593;
-            margin-top: 3px;
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
         }
 
-        /* Button Style */
+        /* Premium Golden Glowing Buttons */
         .task-btn {
-            background: #8b5cf6;
-            color: white;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #060213;
             border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 10px 24px;
+            border-radius: 14px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
-            transition: 0.2s;
+            box-shadow: 0 6px 15px rgba(255, 204, 0, 0.25);
+            transition: all 0.3s ease;
         }
 
-        .task-btn:hover {
-            background: #7c3aed;
+        .task-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.15);
         }
 
-        /* Footer Navigation */
+        /* Fixed Bottom Navigation Menu (Golden Accents) */
         .footer-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #110e20;
-            border-top: 1px solid #1e1938;
+            background: rgba(10, 8, 5, 0.97);
+            border-top: 1px solid rgba(255, 204, 0, 0.15);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            z-index: 100;
+            padding: 14px 0 18px 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #534e66;
-            font-size: 11px;
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 700;
             text-decoration: none;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .nav-item.active {
-            color: #8b5cf6;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
     <div class="header">
         <div class="logo">⚡ Earn Zone</div>
         <div class="avatar">U</div>
     </div>
 
-    <!-- Balance Card Section -->
     <div class="balance-card">
-        <div class="balance-title">Your Balance</div>
+        <div class="balance-title">YOUR BALANCE</div>
         <div class="balance-amount">৳<span id="userBalance">0.00</span></div>
         <div class="balance-sub">Available to withdraw</div>
     </div>
 
-    <!-- Daily Tasks Section -->
     <div class="section-title">ডেইলি টাস্ক</div>
     <div class="task-list">
         <div class="task-item">
@@ -236,35 +277,32 @@
                 <div class="task-icon">📺</div>
                 <div>
                     <div class="task-name">অফার ১ (Ads)</div>
-                    <div class="task-reward" style="color:#bd24df;">+৳১০</div>
+                    <div class="task-reward" style="color:#ffcc00;">+৳১০</div>
                 </div>
             </div>
             <button class="task-btn" onclick="watchAd(10)">টাস্ক</button>
         </div>
     </div>
 
-    <!-- Bottom Navigation Footer -->
     <div class="footer-nav">
         <a class="nav-item active">
-            <span>🏠</span>
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             <div>HOME</div>
         </a>
         <a class="nav-item" onclick="alert('আপনার রেফারেল লিংক কপি হয়েছে!')">
-            <span>👥</span>
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 1.34 5 3s1.34 3 8 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
             <div>REFER</div>
         </a>
         <a class="nav-item" onclick="triggerWithdraw()">
-            <span>💰</span>
+            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
             <div>WITHDRAW</div>
         </a>
     </div>
 
-    <!-- লজিক এবং লিংকের কোড -->
     <script>
-        // আপনার মোনেটাগ এবং টেলিগ্রাম লিংকগুলো এখানে বসাবেন
-        const monetagLink = "আপনার_মোনেটাগ_লিংক_এখানে_দিন";
-        const groupLink = "আপনার_গ্রুপ_লিংক_এখানে_দিন";
-        const channelLink = "আপনার_চ্যানেল_লিংক_এখানে_দিন";
+        const monetagLink = "https://your-monetag-direct-link.com"; 
+        const groupLink = "https://t.me/your_support_group";       
+        const channelLink = "https://t.me/your_payment_channel";   
 
         let userBalance = parseFloat(localStorage.getItem('balance')) || 0.00;
         let isGroupJoined = localStorage.getItem('isGroupJoined') === 'true';
@@ -273,10 +311,10 @@
         function updateUI() {
             document.getElementById('userBalance').innerText = userBalance.toFixed(2);
             if(isGroupJoined) {
-                document.getElementById('groupStatus').innerHTML = "Completed (<span style='color:#a855f7;'>৳১০ Claimed</span>)";
+                document.getElementById('groupStatus').innerHTML = "Completed (<span style='color:#ffcc00;'>৳১০ Claimed</span>)";
             }
             if(isChannelJoined) {
-                document.getElementById('channelStatus').innerHTML = "Completed (<span style='color:#a855f7;'>৳১০ Claimed</span>)";
+                document.getElementById('channelStatus').innerHTML = "Completed (<span style='color:#ffcc00;'>৳১০ Claimed</span>)";
             }
         }
 
