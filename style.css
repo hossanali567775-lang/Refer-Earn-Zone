@@ -1,7 +1,9 @@
-body { background-color: #060213; color: white; padding: 20px; font-family: sans-serif; }
-.header { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #d946ef; text-align: center; }
-.balance-card { background: #1c1438; border-radius: 20px; padding: 20px; text-align: center; border: 1px solid #333; margin-bottom: 20px; }
-.balance-amount { font-size: 32px; font-weight: bold; color: #facc15; margin: 10px 0; }
-.section-title { margin: 20px 0 10px; font-weight: bold; color: #a855f7; }
+body { background-color: #060213; color: white; padding: 20px; font-family: sans-serif; padding-bottom: 80px; }
+.balance-card { background: #1c1438; border-radius: 20px; padding: 20px; text-align: center; border: 1px solid #333; }
+.balance-amount { font-size: 32px; font-weight: bold; color: #facc15; }
 .task-item { background: #16112d; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border: 1px solid #333; }
 .task-btn { background: #7c3aed; color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; }
+
+/* Bottom Nav Style */
+.footer-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #16112d; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; }
+.nav-item { text-align: center; font-size: 10px; color: #aaa; cursor: pointer; }
