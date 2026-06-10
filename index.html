@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="header">⚡ Earn Zone</div>
+
+    <!-- ব্যালেন্স কার্ড -->
     <div class="balance-card">
-        <div>আপনার ব্যালেন্স</div>
+        <div class="label">YOUR BALANCE</div>
         <div class="balance-amount">৳<span id="userBalance">0.00</span></div>
+        <div class="sub-label">Available to withdraw</div>
     </div>
 
-    <div class="task-item">
-        <span>অফার ১ (Ads)</span>
-        <button class="task-btn" onclick="earn(10)">টাস্ক করুন</button>
+    <!-- Official Tasks -->
+    <div class="section-title">Official Tasks</div>
+    <div class="task-list">
+        <div class="task-item">
+            <span>📢 সাপোর্ট গ্রুপে জয়েন করুন</span>
+            <button class="task-btn" onclick="completeTask('group', 15)">টাস্ক</button>
+        </div>
+        <div class="task-item">
+            <span>💬 পেমেন্ট চ্যানেল জয়েন করুন</span>
+            <button class="task-btn" onclick="completeTask('channel', 15)">টাস্ক</button>
+        </div>
+    </div>
+
+    <!-- Daily Tasks -->
+    <div class="section-title">Daily Tasks</div>
+    <div class="task-list">
+        <div class="task-item">
+            <span>📺 Ad 1 (+৳8)</span>
+            <button class="task-btn" onclick="earn(8)">টাস্ক</button>
+        </div>
+        <div class="task-item">
+            <span>📺 Ad 2 (+৳8)</span>
+            <button class="task-btn" onclick="earn(8)">টাস্ক</button>
+        </div>
+        <div class="task-item">
+            <span>📺 Ad 3 (+৳8)</span>
+            <button class="task-btn" onclick="earn(8)">টাস্ক</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
