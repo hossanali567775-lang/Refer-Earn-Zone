@@ -1,15 +1,19 @@
-// টেলিগ্রাম ইউজার আইডি পাওয়ার জন্য
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('userId') || 'default_user';
+// টেলিগ্রাম আইডি অনুযায়ী ব্যালেন্স সেটআপ
+const tg = window.Telegram.WebApp;
+const userId = tg.initDataUnsafe?.user?.id || 'guest';
+const balanceKey = 'balance_' + userId;
 
-// ব্যালেন্স লোড করা
-let balance = localStorage.getItem('balance_' + userId) || 0;
-document.getElementById('balance').innerText = balance;
+let userBalance = parseFloat(localStorage.getItem(balanceKey)) || 0.00;
 
-// টাকা যোগ করার ফাংশন
-function earnMoney() {
-    balance = parseInt(balance) + 10;
-    localStorage.setItem('balance_' + userId, balance);
-    document.getElementById('balance').innerText = balance;
-    alert("১০ টাকা যোগ হয়েছে!");
+function updateUI() {
+    document.getElementById('userBalance').innerText = userBalance.toFixed(2);
 }
+
+function earn(amount) {
+    userBalance += amount;
+    localStorage.setItem(balanceKey, userBalance);
+    updateUI();
+    alert("আপনার ব্যালেন্সে " + amount + " টাকা যোগ হয়েছে!");
+}
+
+updateUI();
