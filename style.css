@@ -1,20 +1,6 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f9;
-}
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-#balance {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: #060213; color: #ffffff; padding: 20px; }
+.balance-card { background: linear-gradient(180deg, #1c1438, #0f0a20); border: 1px solid #a855f7; border-radius: 24px; padding: 30px; text-align: center; margin-bottom: 30px; }
+.balance-amount { font-size: 40px; color: #facc15; font-weight: 800; }
+.task-item { background: #16112d; border-radius: 20px; padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.task-btn { background: #a855f7; color: white; border: none; padding: 10px 20px; border-radius: 12px; cursor: pointer; }
