@@ -21,14 +21,23 @@ def run_server():
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
+    # আপনার কাঙ্ক্ষিত ওয়েলকাম মেসেজ
+    welcome_text = (
+        f"👋 আসসালামু আলাইকুম, {message.from_user.first_name}! \n\n"
+        "আমাদের Earn Zone মিনি অ্যাপে আপনাকে স্বাগতম। \n"
+        "নিচের বোতামে ক্লিক করে অ্যাপটি ওপেন করুন এবং টাস্ক ও রেফার থেকে ইনকাম শুরু করুন!"
+    )
+    
     markup = InlineKeyboardMarkup()
     markup.add(InlineKeyboardButton(text="📱 Open App", web_app=WebAppInfo(url=WEB_APP_URL)))
-    bot.send_message(message.chat.id, "স্বাগতম! অ্যাপ ওপেন করতে নিচে ক্লিক করুন:", reply_markup=markup)
+    
+    # মেসেজ পাঠানো
+    bot.send_message(message.chat.id, welcome_text, reply_markup=markup)
 
 if __name__ == "__main__":
     # সার্ভারটি আলাদা থ্রেডে চালু করা
     Thread(target=run_server).start()
     
-    # বট পোলিং চালু করা (কোনো # চিহ্ন ছাড়া)
+    # বট পোলিং চালু করা
     print("Bot is polling...")
     bot.infinity_polling(timeout=60, long_polling_timeout=60)
