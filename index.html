@@ -1,93 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Zone</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* আপনার আগের ডিজাইনটি এখানে হুবহু আছে */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #060213; color: #ffffff; padding: 20px; padding-bottom: 100px; overflow-x: hidden; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding: 0 5px; }
-        .logo { font-size: 28px; font-weight: 800; background: linear-gradient(90deg, #b832df, #f231a5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .avatar { width: 42px; height: 42px; background: linear-gradient(135deg, #a855f7, #6366f1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
-        .balance-card { background: linear-gradient(180deg, rgba(28, 20, 56, 0.8), rgba(15, 10, 32, 0.9)); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 24px; padding: 30px 20px; text-align: center; margin-bottom: 30px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
-        .balance-amount { font-size: 46px; font-weight: 800; color: #facc15; margin: 12px 0; }
-        .task-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
-        .task-item { background: rgba(22, 17, 45, 0.7); border-radius: 20px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .task-btn { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #ffffff; border: none; padding: 10px 24px; border-radius: 14px; font-weight: 700; cursor: pointer; }
-        .footer-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(13, 9, 31, 0.95); display: flex; justify-content: space-around; padding: 14px 0 18px 0; border-top: 1px solid rgba(168, 85, 247, 0.15); }
-        .nav-item { cursor: pointer; text-align: center; color: #64748b; font-size: 10px; font-weight: 700; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="header">
-        <div class="logo">⚡ Earn Zone</div>
-        <div class="avatar" id="userName">U</div>
-    </div>
-
     <div class="balance-card">
-        <div class="balance-title">YOUR BALANCE</div>
+        <div>আপনার ব্যালেন্স</div>
         <div class="balance-amount">৳<span id="userBalance">0.00</span></div>
     </div>
 
-    <div class="task-list">
-        <div class="task-item">
-            <div class="task-name">সাপোর্ট গ্রুপে জয়েন করুন</div>
-            <button class="task-btn" onclick="completeTask('group', 10)">টাস্ক</button>
-        </div>
-        <div class="task-item">
-            <div class="task-name">অফার ১ (Ads)</div>
-            <button class="task-btn" onclick="watchAd(10, 'Offer 1')">টাস্ক</button>
-        </div>
+    <div class="task-item">
+        <span>অফার ১ (Ads)</span>
+        <button class="task-btn" onclick="earn(10)">টাস্ক করুন</button>
     </div>
 
-    <div class="footer-nav">
-        <a class="nav-item">HOME</a>
-        <a class="nav-item" onclick="alert('আপনার রেফারেল লিংক কপি হয়েছে!')">REFER</a>
-        <a class="nav-item" onclick="triggerWithdraw()">WITHDRAW</a>
-    </div>
-
-    <script>
-        // টেলিগ্রাম ওয়েব অ্যাপ থেকে ইউজার আইডি ধরা
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-        const userId = tg.initDataUnsafe?.user?.id || 'guest_user';
-        
-        // প্রতিটি ইউজারের জন্য আলাদা ব্যালেন্স কী (Key) তৈরি করা
-        const balanceKey = 'balance_' + userId;
-        const groupKey = 'group_' + userId;
-
-        let userBalance = parseFloat(localStorage.getItem(balanceKey)) || 0.00;
-        let isGroupJoined = localStorage.getItem(groupKey) === 'true';
-
-        function updateUI() {
-            document.getElementById('userBalance').innerText = userBalance.toFixed(2);
-        }
-
-        function watchAd(reward, offerName) {
-            alert(offerName + " লোড হচ্ছে...");
-            userBalance += reward;
-            localStorage.setItem(balanceKey, userBalance);
-            updateUI();
-        }
-
-        function completeTask(type, reward) {
-            if (localStorage.getItem(groupKey) === 'true') { alert("অলরেডি করেছেন!"); return; }
-            localStorage.setItem(groupKey, 'true');
-            userBalance += reward;
-            localStorage.setItem(balanceKey, userBalance);
-            updateUI();
-        }
-
-        function triggerWithdraw() {
-            if(userBalance < 50) alert("ন্যূনতম ৫০ টাকা প্রয়োজন।");
-            else alert("রিকোয়েস্ট পাঠানো হয়েছে।");
-        }
-
-        updateUI();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
