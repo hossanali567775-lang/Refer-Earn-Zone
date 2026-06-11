@@ -7,18 +7,21 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- Balance Card -->
     <div class="balance-card">
         <p class="title">TOTAL BALANCE</p>
-        <h1>৳100.00</h1>
+        <h1 id="balance">৳0.00</h1>
 
         <div class="live-box">
             <span class="dot"></span>
@@ -26,7 +29,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
     </div>
 
-    <!-- Join & Earn -->
     <h3 class="section-title">
         JOIN & EARN (SPECIAL REWARDS)
     </h3>
@@ -39,10 +41,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>Reward: ৳25.00</p>
             </div>
         </div>
-
-        <a href="https://t.me/+-JhqvcZQxEY1YTI1">
-            <button>JOIN NOW</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://t.me/+-JhqvcZQxEY1YTI1')">JOIN NOW</button>
     </div>
 
     <div class="task-box">
@@ -53,10 +52,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>Reward: ৳25.00</p>
             </div>
         </div>
-
-        <a href="https://t.me/+GxE45tmJDgNjNDc1">
-            <button>JOIN NOW</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://t.me/+GxE45tmJDgNjNDc1')">JOIN NOW</button>
     </div>
 
     <div class="task-box">
@@ -67,8 +63,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>Reward: ৳0.00</p>
             </div>
         </div>
-
-        <button>WATCH NOW</button>
+        <button onclick="startTask(this, 0.00, '#')">WATCH NOW</button>
     </div>
 
     <div class="task-box">
@@ -78,44 +73,29 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <h4>কাজ বুঝতে ভিডিও দেখুন</h4>
             </div>
         </div>
-
-        <button>WATCH NOW</button>
+        <button onclick="startTask(this, 0.00, '#')">WATCH NOW</button>
     </div>
 
-    <!-- Ad Slot -->
     <div class="ad-section">
 
         <div class="ad-card">
             <i class="fa-regular fa-circle-play"></i>
-
             <h3>অ্যাড স্লট ১</h3>
-
             <p class="reward">+৳15.00</p>
-
             <small>Used: 0/10</small>
-
-            <a href="https://omg10.com/4/11131720">
-                <button>WATCH</button>
-            </a>
+            <button onclick="startTask(this, 15.00, 'https://omg10.com/4/11131720')">WATCH</button>
         </div>
 
         <div class="ad-card">
             <i class="fa-solid fa-bolt"></i>
-
             <h3>অ্যাড স্লট ২</h3>
-
             <p class="reward reward2">+৳15.00</p>
-
             <small>Used: 0/10</small>
-
-            <a href="https://omg10.com/4/11131822">
-                <button>WATCH</button>
-            </a>
+            <button onclick="startTask(this, 15.00, 'https://omg10.com/4/11131822')">WATCH</button>
         </div>
 
     </div>
 
-    <!-- Tasks -->
     <h3 class="section-title">
         SPECIAL WEB TASKS (DAILY 5)
     </h3>
@@ -128,10 +108,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>+৳25.00</p>
             </div>
         </div>
-
-        <a href="https://omg10.com/4/11131725">
-            <button>বিজ্ঞাপন দেখুন</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131725')">বিজ্ঞাপন দেখুন</button>
     </div>
 
     <div class="task-box">
@@ -142,10 +119,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>+৳25.00</p>
             </div>
         </div>
-
-        <a href="https://omg10.com/4/11131724">
-            <button>বিজ্ঞাপন দেখুন</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131724')">বিজ্ঞাপন দেখুন</button>
     </div>
 
     <div class="task-box">
@@ -156,10 +130,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>+৳25.00</p>
             </div>
         </div>
-
-        <a href="https://omg10.com/4/11131723">
-            <button>বিজ্ঞাপন দেখুন</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131723')">বিজ্ঞাপন দেখুন</button>
     </div>
 
     <div class="task-box">
@@ -170,10 +141,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>+৳25.00</p>
             </div>
         </div>
-
-        <a href="https://omg10.com/4/11131722">
-            <button>বিজ্ঞাপন দেখুন</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131722')">বিজ্ঞাপন দেখুন</button>
     </div>
 
     <div class="task-box">
@@ -184,15 +152,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <p>+৳25.00</p>
             </div>
         </div>
-
-        <a href="https://omg10.com/4/11131721">
-            <button>বিজ্ঞাপন দেখুন</button>
-        </a>
+        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131721')">বিজ্ঞাপন দেখুন</button>
     </div>
 
 </div>
 
-<!-- Bottom Menu -->
 <div class="bottom-nav">
 
     <a class="active">
