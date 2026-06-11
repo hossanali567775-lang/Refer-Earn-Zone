@@ -1,10 +1,16 @@
-body { background: #0a0a0f; color: #fff; font-family: sans-serif; padding-bottom: 80px; }
+body { background: #0a0a0f; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 90px; }
 .app-container { padding: 20px; }
-.balance-card { background: linear-gradient(145deg, #1c1c28, #0a0a0f); padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #333; }
+.balance-card { background: #16161f; padding: 25px; border-radius: 20px; text-align: center; margin-bottom: 20px; }
+.live-badge { display: inline-block; background: #222; padding: 5px 15px; border-radius: 15px; font-size: 12px; margin-top: 10px; }
 .reward-item, .web-task-item { display: flex; justify-content: space-between; align-items: center; background: #16161f; padding: 15px; margin-bottom: 10px; border-radius: 15px; }
-button { background: #5c4dff; color: #fff; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; }
-.task-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.task-card { background: #16161f; padding: 20px; border-radius: 15px; text-align: center; border: 1px solid #333; }
-.bottom-nav { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; border-radius: 20px 20px 0 0; }
-.nav-item { text-align: center; color: #888; font-size: 10px; }
+button { background: #5c4dff; color: #fff; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+button:disabled { background: #333; color: #888; cursor: not-allowed; }
+button.no-reward { background: transparent; border: 1px solid #5c4dff; color: #5c4dff; }
+.task-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+.task-card { background: #16161f; padding: 20px; border-radius: 15px; text-align: center; cursor: pointer; }
+
+/* Bottom Navigation Bar */
+.bottom-nav { position: fixed; bottom: 0; width: 100%; background: #16161f; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; border-radius: 20px 20px 0 0; }
+.nav-item { text-align: center; color: #888; font-size: 10px; cursor: pointer; }
+.nav-item span { font-size: 20px; display: block; margin-bottom: 5px; }
 .nav-item.active { color: #fff; }
