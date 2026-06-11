@@ -1,32 +1,30 @@
-const tg = window.Telegram.WebApp;
-const userId = tg.initDataUnsafe?.user?.id || 'guest';
-const balanceKey = 'balance_' + userId;
+let balance = parseFloat(localStorage.getItem('userBalance')) || 100.00;
+document.getElementById('balance').innerText = '৳' + balance.toFixed(2);
 
-let userBalance = parseFloat(localStorage.getItem(balanceKey)) || 0.00;
-
-function updateUI() {
-    document.getElementById('userBalance').innerText = userBalance.toFixed(2);
+function startTask(btn, amount, link) {
+    let timeLeft = 10;
+    btn.disabled = true;
+    btn.innerText = timeLeft + "s";
     
-    // টিক চিহ্ন চেক
-    if(localStorage.getItem('group_' + userId)) {
-        document.getElementById('groupTask').innerHTML = "<span>📢 সাপোর্ট গ্রুপ (Done ✅)</span>";
-    }
-    if(localStorage.getItem('channel_' + userId)) {
-        document.getElementById('channelTask').innerHTML = "<span>💬 পেমেন্ট চ্যানেল (Done ✅)</span>";
-    }
-}
+    // বিজ্ঞাপন ওপেন হবে
+    window.open(link, '_blank');
 
-function completeTask(type, reward) {
-    if(localStorage.getItem(type + '_' + userId)) {
-        alert("আপনি অলরেডি এটি করেছেন!");
-        return;
-    }
-    
-    userBalance += reward;
-    localStorage.setItem(balanceKey, userBalance);
-    localStorage.setItem(type + '_' + userId, 'true');
-    updateUI();
-    alert("অভিনন্দন! ১০ টাকা যোগ হয়েছে।");
+    // টাইমার শুরু
+    let timer = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+            btn.innerText = timeLeft + "s";
+        } else {
+            clearInterval(timer);
+            // ব্যালেন্স অ্যাড হবে
+            balance += amount;
+            localStorage.setItem('userBalance', balance);
+            document.getElementById('balance').innerText = '৳' + balance.toFixed(2);
+            
+            // বাটন সম্পন্ন হয়ে যাবে
+            btn.innerText = "সম্পন্ন";
+            btn.style.backgroundColor = "#333";
+            btn.style.color = "#888";
+        }
+    }, 1000);
 }
-
-updateUI();
