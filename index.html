@@ -8,55 +8,63 @@
 </head>
 <body>
     <div class="app-container">
-        <!-- Balance Section -->
         <div class="balance-card">
             <p>TOTAL BALANCE</p>
-            <h1>৳১০০.০০</h1>
+            <h1 id="balance">৳১০০.০০</h1>
             <div class="live-badge">● LIVE EARNINGS</div>
         </div>
 
-        <!-- Special Rewards -->
-        <div class="reward-list">
-            <div class="reward-item">
-                <span>OFFICIAL GROUP <br><small>Reward: ৳৫০.০০</small></span>
-                <button onclick="window.open('https://t.me/+-JhqvcZQxEY1YTI1', '_blank')">JOIN NOW</button>
-            </div>
-            <div class="reward-item">
-                <span>PAYMENT PROOF <br><small>Reward: ৳৫০.০০</small></span>
-                <button onclick="window.open('https://t.me/+GxE45tmJDgNjNDc1', '_blank')">JOIN NOW</button>
-            </div>
-            <div class="reward-item">
-                <span>SPONSOR</span>
-                <button onclick="window.open('https://omg10.com/4/11131720', '_blank')">WATCH NOW</button>
-            </div>
-            <div class="reward-item">
-                <span>ভিডিও দেখুন</span>
-                <button>NO REWARD</button>
-            </div>
+        <div class="reward-item">
+            <span>OFFICIAL GROUP <br><small>Reward: ৳৫০.০০</small></span>
+            <button onclick="window.open('https://t.me/+-JhqvcZQxEY1YTI1', '_blank')">JOIN NOW</button>
+        </div>
+        <div class="reward-item">
+            <span>PAYMENT PROOF <br><small>Reward: ৳৫০.০০</small></span>
+            <button onclick="window.open('https://t.me/+GxE45tmJDgNjNDc1', '_blank')">JOIN NOW</button>
+        </div>
+        <div class="reward-item">
+            <span>SPONSOR</span>
+            <button onclick="window.open('https://omg10.com/4/11131720', '_blank')">WATCH NOW</button>
+        </div>
+        <div class="reward-item">
+            <span>ভিডিও দেখুন</span>
+            <button class="no-reward">NO REWARD</button>
         </div>
 
-        <!-- Ad Slots -->
         <div class="task-grid">
             <div class="task-card" onclick="window.open('https://omg10.com/4/11131720', '_blank')">অ্যাড স্লট ১ <br> +১০.০০</div>
             <div class="task-card" onclick="window.open('https://omg10.com/4/11131822', '_blank')">অ্যাড স্লট ২ <br> +১০.০০</div>
         </div>
 
-        <!-- Special Web Tasks -->
-        <div class="web-tasks">
-            <div class="web-task-item"><span>টাস্ক - ১ <br> +২৫.০০</span><button onclick="window.open('https://omg10.com/4/11131725', '_blank')">বিজ্ঞাপন দেখুন</button></div>
-            <div class="web-task-item"><span>টাস্ক - ২ <br> +২৫.০০</span><button onclick="window.open('https://omg10.com/4/11131724', '_blank')">বিজ্ঞাপন দেখুন</button></div>
-            <div class="web-task-item"><span>টাস্ক - ৩ <br> +২৫.০০</span><button onclick="window.open('https://omg10.com/4/11131723', '_blank')">বিজ্ঞাপন দেখুন</button></div>
-            <div class="web-task-item"><span>টাস্ক - ৪ <br> +২৫.০০</span><button onclick="window.open('https://omg10.com/4/11131722', '_blank')">বিজ্ঞাপন দেখুন</button></div>
-            <div class="web-task-item"><span>টাস্ক - ৫ <br> +২৫.০০</span><button onclick="window.open('https://omg10.com/4/11131721', '_blank')">বিজ্ঞাপন দেখুন</button></div>
+        <div class="web-task-item">
+            <span>টাস্ক - ১ <br> +২৫.০০</span>
+            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131725')">বিজ্ঞাপন দেখুন</button>
+        </div>
+        <div class="web-task-item">
+            <span>টাস্ক - ২ <br> +২৫.০০</span>
+            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131724')">বিজ্ঞাপন দেখুন</button>
+        </div>
+        <div class="web-task-item">
+            <span>টাস্ক - ৩ <br> +২৫.০০</span>
+            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131723')">বিজ্ঞাপন দেখুন</button>
+        </div>
+        <div class="web-task-item">
+            <span>টাস্ক - ৪ <br> +২৫.০০</span>
+            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131722')">বিজ্ঞাপন দেখুন</button>
+        </div>
+        <div class="web-task-item">
+            <span>টাস্ক - ৫ <br> +২৫.০০</span>
+            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131721')">বিজ্ঞাপন দেখুন</button>
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <div class="nav-item active"><span>🏠</span><p>HOME</p></div>
         <div class="nav-item"><span>👥</span><p>REFER</p></div>
         <div class="nav-item"><span>💸</span><p>WITHDRAW</p></div>
         <div class="nav-item"><span>👤</span><p>PROFILE</p></div>
     </nav>
+
+    <script src="script.js"></script>
 </body>
 </html>
