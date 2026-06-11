@@ -1,70 +1,223 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK Income</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TK Income</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-    <div class="app-container">
-        <div class="balance-card">
-            <p>TOTAL BALANCE</p>
-            <h1 id="balance">৳১০০.০০</h1>
-            <div class="live-badge">● LIVE EARNINGS</div>
-        </div>
 
-        <div class="reward-item">
-            <span>OFFICIAL GROUP <br><small>Reward: ৳৫০.০০</small></span>
-            <button onclick="window.open('https://t.me/+-JhqvcZQxEY1YTI1', '_blank')">JOIN NOW</button>
-        </div>
-        <div class="reward-item">
-            <span>PAYMENT PROOF <br><small>Reward: ৳৫০.০০</small></span>
-            <button onclick="window.open('https://t.me/+GxE45tmJDgNjNDc1', '_blank')">JOIN NOW</button>
-        </div>
-        <div class="reward-item">
-            <span>SPONSOR</span>
-            <button onclick="window.open('https://omg10.com/4/11131720', '_blank')">WATCH NOW</button>
-        </div>
-        <div class="reward-item">
-            <span>ভিডিও দেখুন</span>
-            <button class="no-reward">NO REWARD</button>
-        </div>
+<div class="container">
 
-        <div class="task-grid">
-            <div class="task-card" onclick="window.open('https://omg10.com/4/11131720', '_blank')">অ্যাড স্লট ১ <br> +১০.০০</div>
-            <div class="task-card" onclick="window.open('https://omg10.com/4/11131822', '_blank')">অ্যাড স্লট ২ <br> +১০.০০</div>
-        </div>
+    <!-- Balance Card -->
+    <div class="balance-card">
+        <p class="title">TOTAL BALANCE</p>
+        <h1>৳100.00</h1>
 
-        <div class="web-task-item">
-            <span>টাস্ক - ১ <br> +২৫.০০</span>
-            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131725')">বিজ্ঞাপন দেখুন</button>
-        </div>
-        <div class="web-task-item">
-            <span>টাস্ক - ২ <br> +২৫.০০</span>
-            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131724')">বিজ্ঞাপন দেখুন</button>
-        </div>
-        <div class="web-task-item">
-            <span>টাস্ক - ৩ <br> +২৫.০০</span>
-            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131723')">বিজ্ঞাপন দেখুন</button>
-        </div>
-        <div class="web-task-item">
-            <span>টাস্ক - ৪ <br> +২৫.০০</span>
-            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131722')">বিজ্ঞাপন দেখুন</button>
-        </div>
-        <div class="web-task-item">
-            <span>টাস্ক - ৫ <br> +২৫.০০</span>
-            <button onclick="startTask(this, 25, 'https://omg10.com/4/11131721')">বিজ্ঞাপন দেখুন</button>
+        <div class="live-box">
+            <span class="dot"></span>
+            LIVE EARNINGS
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <div class="nav-item active"><span>🏠</span><p>HOME</p></div>
-        <div class="nav-item"><span>👥</span><p>REFER</p></div>
-        <div class="nav-item"><span>💸</span><p>WITHDRAW</p></div>
-        <div class="nav-item"><span>👤</span><p>PROFILE</p></div>
-    </nav>
+    <!-- Join & Earn -->
+    <h3 class="section-title">
+        JOIN & EARN (SPECIAL REWARDS)
+    </h3>
 
-    <script src="script.js"></script>
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-regular fa-comment"></i>
+            <div>
+                <h4>OFFICIAL GROUP</h4>
+                <p>Reward: ৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://t.me/+-JhqvcZQxEY1YTI1">
+            <button>JOIN NOW</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+                <h4>PAYMENT PROOF</h4>
+                <p>Reward: ৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://t.me/+GxE45tmJDgNjNDc1">
+            <button>JOIN NOW</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-regular fa-circle-play"></i>
+            <div>
+                <h4>SPONSOR</h4>
+                <p>Reward: ৳0.00</p>
+            </div>
+        </div>
+
+        <button>WATCH NOW</button>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-regular fa-circle-play"></i>
+            <div>
+                <h4>কাজ বুঝতে ভিডিও দেখুন</h4>
+            </div>
+        </div>
+
+        <button>WATCH NOW</button>
+    </div>
+
+    <!-- Ad Slot -->
+    <div class="ad-section">
+
+        <div class="ad-card">
+            <i class="fa-regular fa-circle-play"></i>
+
+            <h3>অ্যাড স্লট ১</h3>
+
+            <p class="reward">+৳15.00</p>
+
+            <small>Used: 0/10</small>
+
+            <a href="https://omg10.com/4/11131720">
+                <button>WATCH</button>
+            </a>
+        </div>
+
+        <div class="ad-card">
+            <i class="fa-solid fa-bolt"></i>
+
+            <h3>অ্যাড স্লট ২</h3>
+
+            <p class="reward reward2">+৳15.00</p>
+
+            <small>Used: 0/10</small>
+
+            <a href="https://omg10.com/4/11131822">
+                <button>WATCH</button>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Tasks -->
+    <h3 class="section-title">
+        SPECIAL WEB TASKS (DAILY 5)
+    </h3>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-solid fa-link"></i>
+            <div>
+                <h4>টাস্ক - ১</h4>
+                <p>+৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://omg10.com/4/11131725">
+            <button>বিজ্ঞাপন দেখুন</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-solid fa-link"></i>
+            <div>
+                <h4>টাস্ক - ২</h4>
+                <p>+৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://omg10.com/4/11131724">
+            <button>বিজ্ঞাপন দেখুন</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-solid fa-link"></i>
+            <div>
+                <h4>টাস্ক - ৩</h4>
+                <p>+৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://omg10.com/4/11131723">
+            <button>বিজ্ঞাপন দেখুন</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-solid fa-link"></i>
+            <div>
+                <h4>টাস্ক - ৪</h4>
+                <p>+৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://omg10.com/4/11131722">
+            <button>বিজ্ঞাপন দেখুন</button>
+        </a>
+    </div>
+
+    <div class="task-box">
+        <div class="left">
+            <i class="fa-solid fa-link"></i>
+            <div>
+                <h4>টাস্ক - ৫</h4>
+                <p>+৳25.00</p>
+            </div>
+        </div>
+
+        <a href="https://omg10.com/4/11131721">
+            <button>বিজ্ঞাপন দেখুন</button>
+        </a>
+    </div>
+
+</div>
+
+<!-- Bottom Menu -->
+<div class="bottom-nav">
+
+    <a class="active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a>
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Refer</span>
+    </a>
+
+    <a>
+        <i class="fa-solid fa-wallet"></i>
+        <span>Withdraw</span>
+    </a>
+
+    <a>
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+    </a>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
