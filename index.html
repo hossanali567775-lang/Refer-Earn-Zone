@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Refer Earn Zone</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,13 +16,16 @@
 
     <div class="app-container">
         
+        <!-- Header -->
         <div class="app-header">
             <button class="header-circle-btn"><i class="fa-solid fa-xmark"></i></button>
             <h2 class="app-title">Refer Earn Zone</h2>
             <button class="header-circle-btn"><i class="fa-solid fa-ellipsis"></i></button>
         </div>
 
+        <!-- ================= হোম ট্যাব (HOME TAB) ================= -->
         <div id="home-tab" class="tab-content active">
+            <!-- Balance Card -->
             <div class="glass-card balance-card">
                 <div class="balance-label">মোট ব্যালেন্স</div>
                 <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
@@ -51,6 +56,7 @@
 
             <div class="section-divider-title">JOIN & EARN (SPECIAL REWARDS)</div>
             
+            <!-- Support Group -->
             <div class="glass-card premium-task-card">
                 <div class="task-left-block">
                     <div class="neon-icon-holder purple-glow"><i class="fa-solid fa-comments"></i></div>
@@ -62,6 +68,7 @@
                 <button class="premium-gradient-btn purple-grad" id="sp-task1" onclick="startTask('sp-task1', 35, 'https://t.me/+-JhqvcZQxEY1YTI1')">যোগ দিন এখনই</button>
             </div>
 
+            <!-- Payment Group -->
             <div class="glass-card premium-task-card">
                 <div class="task-left-block">
                     <div class="neon-icon-holder blue-glow"><i class="fa-solid fa-shield-halved"></i></div>
@@ -73,6 +80,7 @@
                 <button class="premium-gradient-btn blue-grad" id="sp-task2" onclick="startTask('sp-task2', 35, 'https://t.me/+GxE45tmJDgNjNDc1')">পেমেন্ট দেখুন</button>
             </div>
 
+            <!-- Ads Slots 1 -->
             <div class="glass-card premium-task-card">
                 <div class="task-left-block">
                     <div class="neon-icon-holder gold-glow"><i class="fa-solid fa-clapperboard"></i></div>
@@ -84,20 +92,53 @@
                 <button class="premium-gradient-btn gold-grad" id="sp-task3" onclick="startTask('sp-task3', 25, 'https://omg10.com/4/11131720')">WATCH AD 1</button>
             </div>
 
+            <!-- Ads Slots 2 -->
+            <div class="glass-card premium-task-card">
+                <div class="task-left-block">
+                    <div class="neon-icon-holder gold-glow"><i class="fa-solid fa-video"></i></div>
+                    <div class="task-details">
+                        <h4>SPONSOR AD SLOT 2</h4>
+                        <p>REWARD: ৳২৫.০০</p>
+                    </div>
+                </div>
+                <button class="premium-gradient-btn gold-grad" id="sp-task4" onclick="startTask('sp-task4', 25, 'https://omg10.com/4/11131822')">WATCH AD 2</button>
+            </div>
+
             <div class="section-divider-title">স্পেশাল টাস্ক (ডেইলি ৫)</div>
 
+            <!-- Task 1 -->
             <div class="glass-card daily-task-list-row">
                 <span class="daily-task-name">টাস্ক - ১</span>
                 <span class="daily-task-prize">৳২৫.০০</span>
                 <button class="daily-action-btn" id="daily-task1" onclick="startTask('daily-task1', 25, 'https://omg10.com/4/11131725')">টাস্ক দেখুন</button>
             </div>
+            <!-- Task 2 -->
             <div class="glass-card daily-task-list-row">
                 <span class="daily-task-name">টাস্ক - ২</span>
                 <span class="daily-task-prize">৳২৫.০০</span>
                 <button class="daily-action-btn" id="daily-task2" onclick="startTask('daily-task2', 25, 'https://omg10.com/4/11131724')">টাস্ক দেখুন</button>
             </div>
+            <!-- Task 3 -->
+            <div class="glass-card daily-task-list-row">
+                <span class="daily-task-name">টাস্ক - ৩</span>
+                <span class="daily-task-prize">৳২৫.০০</span>
+                <button class="daily-action-btn" id="daily-task3" onclick="startTask('daily-task3', 25, 'https://omg10.com/4/11131723')">টাস্ক দেখুন</button>
+            </div>
+            <!-- Task 4 -->
+            <div class="glass-card daily-task-list-row">
+                <span class="daily-task-name">টাস্ক - ৪</span>
+                <span class="daily-task-prize">৳২৫.০০</span>
+                <button class="daily-action-btn" id="daily-task4" onclick="startTask('daily-task4', 25, 'https://omg10.com/4/11131722')">টাস্ক দেখুন</button>
+            </div>
+            <!-- Task 5 -->
+            <div class="glass-card daily-task-list-row">
+                <span class="daily-task-name">টাস্ক - ৫</span>
+                <span class="daily-task-prize">৳২৫.০০</span>
+                <button class="daily-action-btn" id="daily-task5" onclick="startTask('daily-task5', 25, 'https://omg10.com/4/11131721')">টাস্ক দেখুন</button>
+            </div>
         </div>
 
+        <!-- ================= রেফার ট্যাব (REFER TAB) ================= -->
         <div id="refer-tab" class="tab-content">
             <div class="glass-card text-center-card">
                 <div class="neon-icon-holder purple-glow center-icon"><i class="fa-solid fa-user-plus"></i></div>
@@ -111,11 +152,12 @@
             </div>
         </div>
 
+        <!-- ================= উত্তোলন ট্যাব (WITHDRAW TAB) ================= -->
         <div id="withdraw-tab" class="tab-content">
             <div class="glass-card text-center-card">
                 <div class="neon-icon-holder blue-glow center-icon"><i class="fa-solid fa-wallet"></i></div>
                 <h3 class="tab-page-title">টাকা উত্তোলন করুন</h3>
-                <p class="tab-page-desc">আপনার উপার্জিত টাকা সহজে বিকাশ বা নগদে তুলে নিন।</p>
+                <p class="tab-page-desc" style="color: #ff5252; font-weight: 600;">⚠️ শর্ত: নূন্যতম ১০টি রেফার এবং ৭০০ টাকা থাকতে হবে।</p>
                 
                 <div class="withdraw-form">
                     <label class="input-label">পেমেন্ট মেথড সিলেক্ট করুন</label>
@@ -128,13 +170,14 @@
                     <input type="number" id="withdraw-number" class="premium-input" placeholder="017XXXXXXXX">
 
                     <label class="input-label">টাকার পরিমাণ (৳)</label>
-                    <input type="number" id="withdraw-amount" class="premium-input" placeholder="নূন্যতম ৳১০০">
+                    <input type="number" id="withdraw-amount" class="premium-input" placeholder="নূন্যতম ৳৭০০">
 
                     <button class="premium-gradient-btn blue-grad full-width-btn" onclick="requestWithdraw()">অনুরোধ পাঠান</button>
                 </div>
             </div>
         </div>
 
+        <!-- ================= প্রোফাইল ট্যাব (PROFILE TAB) ================= -->
         <div id="profile-tab" class="tab-content">
             <div class="glass-card profile-details-card">
                 <div class="profile-avatar"><i class="fa-solid fa-user-shield"></i></div>
@@ -154,8 +197,10 @@
             </div>
         </div>
 
+        <!-- Bottom Spacer -->
         <div style="height: 110px;"></div>
 
+        <!-- Bottom Navigation Bar -->
         <div class="premium-navbar">
             <div class="nav-button active" onclick="switchTab(0, 'home-tab')">
                 <i class="fa-solid fa-house"></i>
@@ -177,6 +222,7 @@
 
     </div>
 
+    <!-- Firebase SDK (Compatibility Mode) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="script.js"></script>
