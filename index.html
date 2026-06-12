@@ -10,119 +10,129 @@
 </head>
 <body>
 
+    <div class="bg-pulse-networks"></div>
+
     <div class="app-container">
         
         <div class="app-header">
-            <button class="header-btn"><i class="fa-solid fa-xmark"></i></button>
+            <button class="header-circle-btn"><i class="fa-solid fa-xmark"></i></button>
             <h2 class="app-title">Refer Earn Zone</h2>
-            <button class="header-btn"><i class="fa-solid fa-ellipsis"></i></button>
+            <button class="header-circle-btn"><i class="fa-solid fa-ellipsis"></i></button>
         </div>
 
         <div class="glass-card balance-card">
             <div class="balance-label">মোট ব্যালেন্স</div>
             <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
             
-            <div class="stats-row">
-                <div class="stat-box">
-                    <span class="label">REFERRED FRIENDS:</span>
-                    <span id="referred-count" class="value"><i class="fa-solid fa-users"></i> 0</span>
+            <div class="card-meta-labels">
+                <span>RECENT REWARDS:</span>
+                <span>PENDING DATA POINTS</span>
+            </div>
+
+            <div class="stats-container-row">
+                <div class="stat-box-left">
+                    <span class="stat-title">REFERRED FRIENDS:</span>
+                    <span id="referred-count" class="stat-value">42</span>
                 </div>
                 
-                <div class="live-pulse-circle">
-                    <div class="pulse-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <span class="pulse-text">LIVE EARNINGS UPDATE</span>
+                <div class="live-pulse-wrapper">
+                    <div class="pulse-glow-ring"></div>
+                    <div class="pulse-center-content">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>LIVE EARNINGS UPDATE</span>
+                    </div>
                 </div>
                 
-                <div class="stat-box">
-                    <span class="label">PENDING APPROVAL:</span>
-                    <span id="pending-count" class="value"><i class="fa-solid fa-clock"></i> 0</span>
+                <div class="stat-box-right">
+                    <span class="stat-title">PENDING APPROVAL:</span>
+                    <span id="pending-count" class="stat-value">5</span>
                 </div>
             </div>
         </div>
 
-        <div class="section-title">JOIN & EARN (SPECIAL REWARDS)</div>
+        <div class="section-divider-title">JOIN & EARN (SPECIAL REWARDS)</div>
         
-        <div class="glass-card task-row">
-            <div class="task-info">
-                <div class="task-icon purple-glow"><i class="fa-solid fa-comments"></i></div>
-                <div class="task-text">
+        <div class="glass-card premium-task-card">
+            <div class="task-left-block">
+                <div class="neon-icon-holder purple-glow"><i class="fa-solid fa-comments"></i></div>
+                <div class="task-details">
                     <h4>OFFICIAL COMMUNITY GROUP</h4>
                     <p>REWARD: ৳50.00</p>
                 </div>
             </div>
-            <button class="action-btn purple-btn" id="sp-task1" onclick="startTask('sp-task1', 50)">যোগ দিন</button>
+            <button class="premium-gradient-btn purple-grad" id="sp-task1" onclick="startTask('sp-task1', 50)">যোগ দিন এখনই</button>
         </div>
 
-        <div class="glass-card task-row">
-            <div class="task-info">
-                <div class="task-icon blue-glow"><i class="fa-solid fa-shield-check"></i></div>
-                <div class="task-text">
+        <div class="glass-card premium-task-card">
+            <div class="task-left-block">
+                <div class="neon-icon-holder blue-glow"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="task-details">
                     <h4>VERIFIED PAYMENT PROOF</h4>
                     <p>REWARD: ৳50.00</p>
                 </div>
             </div>
-            <button class="action-btn purple-btn" id="sp-task2" onclick="startTask('sp-task2', 50)">প্রমাণ দেখুন</button>
+            <button class="premium-gradient-btn blue-grad" id="sp-task2" onclick="startTask('sp-task2', 50)">পেমেন্ট প্রমাণ দেখুন</button>
         </div>
 
-        <div class="glass-card task-row">
-            <div class="task-info">
-                <div class="task-icon gold-glow"><i class="fa-solid fa-clapperboard"></i></div>
-                <div class="task-text">
+        <div class="glass-card premium-task-card">
+            <div class="task-left-block">
+                <div class="neon-icon-holder gold-glow"><i class="fa-solid fa-clapperboard"></i></div>
+                <div class="task-details">
                     <h4>SPONSOR (VIP FOCUS)</h4>
                     <p>REWARD: ৳25.00</p>
                 </div>
             </div>
-            <button class="action-btn watch-btn" id="sp-task3" onclick="startTask('sp-task3', 25)">WATCH</button>
+            <button class="premium-gradient-btn gold-grad" id="sp-task3" onclick="startTask('sp-task3', 25)">WATCH SPONSOR</button>
         </div>
 
-        <div class="section-title">স্পেশাল টাস্ক (ডেইলি ৫)</div>
+        <div class="section-divider-title">স্পেশাল টাস্ক (ডেইলি ৫)</div>
 
-        <div class="glass-card simple-task-row">
-            <span class="simple-task-name">টাস্ক - ১</span>
-            <span class="simple-task-reward">৳৫০.০০</span>
-            <button class="simple-task-btn" id="daily-task1" onclick="startTask('daily-task1', 50)">টাস্ক দেখুন</button>
+        <div class="glass-card daily-task-list-row">
+            <span class="daily-task-name">টাস্ক - ১</span>
+            <span class="daily-task-prize">৳৫০.০০</span>
+            <button class="daily-action-btn" id="daily-task1" onclick="startTask('daily-task1', 50)">টাস্ক দেখুন</button>
         </div>
 
-        <div class="glass-card simple-task-row">
-            <span class="simple-task-name">টাস্ক - ২</span>
-            <span class="simple-task-reward">৳৫০.০০</span>
-            <button class="simple-task-btn" id="daily-task2" onclick="startTask('daily-task2', 50)">টাস্ক দেখুন</button>
+        <div class="glass-card daily-task-list-row">
+            <span class="daily-task-name">টাস্ক - ২</span>
+            <span class="daily-task-prize">৳৫০.০০</span>
+            <button class="daily-action-btn" id="daily-task2" onclick="startTask('daily-task2', 50)">টাস্ক দেখুন</button>
         </div>
 
-        <div class="glass-card simple-task-row">
-            <span class="simple-task-name">টাস্ক - ৩</span>
-            <span class="simple-task-reward">৳৫০.০০</span>
-            <button class="simple-task-btn" id="daily-task3" onclick="startTask('daily-task3', 50)">টাস্ক দেখুন</button>
+        <div class="glass-card daily-task-list-row">
+            <span class="daily-task-name">টাস্ক - ৩</span>
+            <span class="daily-task-prize">৳৫০.০০</span>
+            <button class="daily-action-btn" id="daily-task3" onclick="startTask('daily-task3', 50)">টাস্ক দেখুন</button>
         </div>
 
-        <div class="glass-card simple-task-row">
-            <span class="simple-task-name">টাস্ক - ৪</span>
-            <span class="simple-task-reward">৳৫০.০০</span>
-            <button class="simple-task-btn" id="daily-task4" onclick="startTask('daily-task4', 50)">টাস্ক দেখুন</button>
+        <div class="glass-card daily-task-list-row">
+            <span class="daily-task-name">টাস্ক - ৪</span>
+            <span class="daily-task-prize">৳৫০.০০</span>
+            <button class="daily-action-btn" id="daily-task4" onclick="startTask('daily-task4', 50)">টাস্ক দেখুন</button>
         </div>
 
-        <div class="glass-card simple-task-row">
-            <span class="simple-task-name">টাস্ক - ৫</span>
-            <span class="simple-task-reward">৳৫০.০০</span>
-            <button class="simple-task-btn" id="daily-task5" onclick="startTask('daily-task5', 50)">টাস্ক দেখুন</button>
+        <div class="glass-card daily-task-list-row">
+            <span class="daily-task-name">টাস্ক - ৫</span>
+            <span class="daily-task-prize">৳৫০.০০</span>
+            <button class="daily-action-btn" id="daily-task5" onclick="startTask('daily-task5', 50)">টাস্ক দেখুন</button>
         </div>
 
-        <div style="height: 90px;"></div>
+        <div style="height: 110px;"></div>
 
-        <div class="bottom-nav">
-            <div class="nav-item active">
+        <div class="premium-navbar">
+            <div class="nav-button active">
                 <i class="fa-solid fa-house"></i>
                 <span>হোম</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-button">
                 <i class="fa-solid fa-user-plus"></i>
                 <span>রেফার</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-button">
                 <i class="fa-solid fa-wallet"></i>
                 <span>উত্তোলন</span>
             </div>
-            <div class="nav-item">
+            <div class="nav-button">
                 <i class="fa-solid fa-user"></i>
                 <span>প্রোফাইল</span>
             </div>
@@ -132,7 +142,6 @@
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-
     <script src="script.js"></script>
 
 </body>
