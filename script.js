@@ -50,19 +50,30 @@ userRef.on('value', (snapshot) => {
     }
 });
 
-// ৪. লিংক ওপেনিং এবং ব্যালেন্স যোগ করার মূল ফাংশন
+// ৪. লিংক ওপেনিং এবং ব্যালেন্স যোগ করার ফিক্সড ফাংশন
 function startTask(buttonId, rewardAmount, targetUrl) {
-    // প্রথমে ইউজারের জন্য টেলিগ্রাম অ্যাপের ভেতর বা ব্রাউজারে লিংকটি ওপেন করা হবে
-    if (tg && tg.openLink) {
-        tg.openLink(targetUrl);
+    
+    // টেলিগ্রামের সিকিউরিটি পলিসি অনুযায়ী সঠিক পদ্ধতিতে লিংক ওপেনিং সিস্টেম
+    if (tg) {
+        if (targetUrl.includes("t.me")) {
+            // যদি টেলিগ্রামের নিজস্ব গ্রুপ বা চ্যানেলের লিংক হয়
+            tg.openTelegramLink(targetUrl);
+        } else {
+            // যদি ওএমজি (omg10.com) বা অন্য কোনো বাইরের ওয়েবসাইটের লিংক হয়
+            tg.openLink(targetUrl);
+        }
     } else {
-        window.open(targetUrl, '_blank');
+        // যদি টেলিগ্রাম ছাড়া সাধারণ ব্রাউজারে টেস্ট করা হয় (সেফটি ফলব্যাক)
+        const newWindow = window.open(targetUrl, '_blank', 'noopener,noreferrer');
+        if (!newWindow) {
+            alert("দয়া করে আপনার ব্রাউজারের Pop-up blocker বন্ধ করুন লিংকটি দেখার জন্য।");
+        }
     }
 
     const btn = document.getElementById(buttonId);
     let timeLeft = 10; // ১০ সেকেন্ড টাইমার
     
-    // বাটন লক করা
+    // বাটন লক করা যাতে ডাবল ক্লিক না হয়
     btn.disabled = true;
     btn.style.opacity = "0.6";
     
@@ -80,7 +91,7 @@ function startTask(buttonId, rewardAmount, targetUrl) {
             
             // সাকসেস নোটিফিকেশন
             if (tg) {
-                tg.showAlert(`অভিনন্দন! আপনি সফলভাবে কাজটি সম্পন্ন করে ৳${rewardAmount} পেয়েছেন।`);
+                tg.showAlert(` canকরুন! আপনি সফলভাবে কাজটি সম্পন্ন করে ৳${rewardAmount} পেয়েছেন।`);
             } else {
                 alert(`অভিনন্দন! আপনি সফলভাবে কাজটি সম্পন্ন করে ৳${rewardAmount} পেয়েছেন।`);
             }
