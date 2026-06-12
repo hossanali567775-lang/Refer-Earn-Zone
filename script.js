@@ -59,14 +59,14 @@ userRef.on('value', (snapshot) => {
     }
 });
 
-// ৪. রিয়াল-টাইম উইথড্র হিস্টোরি লিসেনার (ইউজারের নিজস্ব ট্রানজেকশন দেখাবে)
+// ৪. রিয়াল-টাইম উইথড্র হিস্টোরি লিসেনার
 database.ref('user_withdrawals/' + userId).on('value', (snapshot) => {
     const historyContainer = document.getElementById('withdraw-history-list');
-    historyContainer.innerHTML = ""; // আগের ডিফল্ট টেক্সট মুছে ফেলা
+    if(!historyContainer) return;
+    historyContainer.innerHTML = ""; 
     
     const data = snapshot.val();
     if (data) {
-        // নতুন রিকোয়েস্ট সবার উপরে দেখানোর জন্য রিভার্স করা হয়েছে
         const keys = Object.keys(data).reverse();
         keys.forEach(key => {
             const item = data[key];
@@ -81,7 +81,7 @@ database.ref('user_withdrawals/' + userId).on('value', (snapshot) => {
                 statusText = "বাতিল";
             }
             
-            const itemHtml = `
+            historyContainer.innerHTML += `
                 <div class="history-item">
                     <div class="history-left">
                         <h5>${item.method} (${item.number})</h5>
@@ -93,17 +93,20 @@ database.ref('user_withdrawals/' + userId).on('value', (snapshot) => {
                     </div>
                 </div>
             `;
-            historyContainer.innerHTML += itemHtml;
         });
     } else {
         historyContainer.innerHTML = `<p style="font-size: 11px; color: #7683be; text-align: center; padding: 15px;">কোনো হিস্টোরি পাওয়া যায়নি</p>`;
     }
 });
 
-const BOT_USERNAME = "ReferEarnZoneBot"; 
-document.getElementById('refer-link-input').value = `https://t.me/${BOT_USERNAME}?start=${userId}`;
+// সঠিক বটের ইউজারনেম এখানে সেট করা হয়েছে
+const BOT_USERNAME = "ReferEarnZone23_bot"; 
+const linkInput = document.getElementById('refer-link-input');
+if(linkInput) {
+    linkInput.value = `https://t.me/${BOT_USERNAME}?start=${userId}`;
+}
 
-// ৫. পেজ বা ট্যাব পরিবর্তনের ফাংশন
+// ৫. পেজ বা ট্যাব পরিবর্তন ফাংশন
 function switchTab(buttonIndex, tabId) {
     const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(tab => tab.classList.remove('active'));
@@ -119,39 +122,32 @@ function switchTab(buttonIndex, tabId) {
 function copyReferLink() {
     const copyText = document.getElementById('refer-link-input');
     copyText.select();
-    copyText.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(copyText.value);
     
     if (tg) tg.showAlert("আপনার রেফার লিংকটি কপি হয়েছে!");
     else alert("আপনার রেফার লিংকটি কপি হয়েছে!");
 }
 
-// ৭. নতুন উইথড্র লজিক (কমপক্ষে ৭০০ টাকা, এর উপর আনলিমিটেড)
+// ৭. নতুন উইথড্র লজিক
 function requestWithdraw() {
     const method = document.getElementById('withdraw-method').value;
     const number = document.getElementById('withdraw-number').value;
     const amount = parseFloat(document.getElementById('withdraw-amount').value);
     
-    // ৭০০ টাকার কম হলে আটকে দেবে
     if (!number || isNaN(amount) || amount < 700) {
         const errorMsg = "দয়া করে সঠিক নাম্বার দিন এবং নূন্যতম ৳৭০০ উত্তোলন করার চেষ্টা করুন।";
         if(tg) tg.showAlert(errorMsg); else alert(errorMsg);
         return;
     }
 
-    // ১০টি রেফার না থাকলে আটকে দেবে
     if (currentGlobalRefers < 10) {
         const referAlert = `টাকা তুলতে কমপক্ষে ১০টি রেফার প্রয়োজন। আপনার বর্তমান রেফার: ${currentGlobalRefers}টি।`;
         if(tg) tg.showAlert(referAlert); else alert(referAlert);
         return;
     }
     
-    // ব্যালেন্স পর্যাপ্ত থাকলে রিকোয়েস্ট সাবমিট হবে
     if (currentGlobalBalance >= amount) {
-        // ব্যালেন্স কাটা
-        userRef.child('balance').transaction((currentBalance) => {
-            return (currentBalance || 0) - amount;
-        });
+        userRef.child('balance').transaction((currentBalance) => (currentBalance || 0) - amount);
         
         const withdrawData = {
             method: method,
@@ -161,20 +157,13 @@ function requestWithdraw() {
             time: new Date().toLocaleString()
         };
 
-        // ১. ইউজারের নিজের হিস্টোরি বক্সে সেভ হবে
         database.ref('user_withdrawals/' + userId).push(withdrawData);
-        
-        // ২. অ্যাডমিন প্যানেলে (Database) রিকোয়েস্ট যাবে যাতে আপনি দেখতে পারেন
-        database.ref('admin_withdrawals').push({
-            userId: userId,
-            name: userName,
-            ...withdrawData
-        });
+        database.ref('admin_withdrawals').push({ userId: userId, name: userName, ...withdrawData });
         
         document.getElementById('withdraw-number').value = "";
         document.getElementById('withdraw-amount').value = "";
         
-        if(tg) tg.showAlert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে! হিস্টোরিতে লক্ষ্য রাখুন।`);
+        if(tg) tg.showAlert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে!`);
         else alert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে!`);
     } else {
         if(tg) tg.showAlert("আপনার অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স নেই!");
@@ -202,13 +191,7 @@ function startTask(buttonId, rewardAmount, targetUrl) {
             btn.innerText = "সম্পন্ন";
             btn.style.background = "#00ffaa";
             btn.style.color = "#000";
-            
-            userRef.child('balance').transaction((currentBalance) => {
-                return (currentBalance || 0) + rewardAmount;
-            });
-            
-            if (tg) tg.showAlert(`অভিনন্দন! আপনি সফলভাবে কাজটি সম্পন্ন করে ৳${rewardAmount} পেয়েছেন।`);
-            else alert(`অভিনন্দন! আপনি সফলভাবে কাজটি সম্পন্ন করে ৳${rewardAmount} পেয়েছেন।`);
+            userRef.child('balance').transaction((currentBalance) => (currentBalance || 0) + rewardAmount);
         } else {
             btn.innerText = `${timeLeft} সে. অপেক্ষা...`;
             timeLeft--;
