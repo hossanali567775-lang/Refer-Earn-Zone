@@ -1,187 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TK Income</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer Earn Zone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
-
-    <div class="balance-card">
-        <p class="title">TOTAL BALANCE</p>
-        <h1 id="balance">৳0.00</h1>
-
-        <div class="live-box">
-            <span class="dot"></span>
-            LIVE EARNINGS
+    <div class="app-container">
+        
+        <div class="app-header">
+            <button class="header-btn"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="app-title">Refer Earn Zone</h2>
+            <button class="header-btn"><i class="fa-solid fa-ellipsis"></i></button>
         </div>
-    </div>
 
-    <h3 class="section-title">
-        JOIN & EARN (SPECIAL REWARDS)
-    </h3>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-regular fa-comment"></i>
-            <div>
-                <h4>OFFICIAL GROUP</h4>
-                <p>Reward: ৳25.00</p>
+        <div class="glass-card balance-card">
+            <div class="balance-label">মোট ব্যালেন্স</div>
+            <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="label">REFERRED FRIENDS:</span>
+                    <span id="referred-count" class="value"><i class="fa-solid fa-users"></i> 0</span>
+                </div>
+                
+                <div class="live-pulse-circle">
+                    <div class="pulse-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <span class="pulse-text">LIVE EARNINGS UPDATE</span>
+                </div>
+                
+                <div class="stat-box">
+                    <span class="label">PENDING APPROVAL:</span>
+                    <span id="pending-count" class="value"><i class="fa-solid fa-clock"></i> 0</span>
+                </div>
             </div>
         </div>
-        <button onclick="startTask(this, 25.00, 'https://t.me/+-JhqvcZQxEY1YTI1')">JOIN NOW</button>
-    </div>
 
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-regular fa-circle-check"></i>
-            <div>
-                <h4>PAYMENT PROOF</h4>
-                <p>Reward: ৳25.00</p>
+        <div class="section-title">JOIN & EARN (SPECIAL REWARDS)</div>
+        
+        <div class="glass-card task-row">
+            <div class="task-info">
+                <div class="task-icon purple-glow"><i class="fa-solid fa-comments"></i></div>
+                <div class="task-text">
+                    <h4>OFFICIAL COMMUNITY GROUP</h4>
+                    <p>REWARD: ৳50.00</p>
+                </div>
+            </div>
+            <button class="action-btn purple-btn" id="sp-task1" onclick="startTask('sp-task1', 50)">যোগ দিন</button>
+        </div>
+
+        <div class="glass-card task-row">
+            <div class="task-info">
+                <div class="task-icon blue-glow"><i class="fa-solid fa-shield-check"></i></div>
+                <div class="task-text">
+                    <h4>VERIFIED PAYMENT PROOF</h4>
+                    <p>REWARD: ৳50.00</p>
+                </div>
+            </div>
+            <button class="action-btn purple-btn" id="sp-task2" onclick="startTask('sp-task2', 50)">প্রমাণ দেখুন</button>
+        </div>
+
+        <div class="glass-card task-row">
+            <div class="task-info">
+                <div class="task-icon gold-glow"><i class="fa-solid fa-clapperboard"></i></div>
+                <div class="task-text">
+                    <h4>SPONSOR (VIP FOCUS)</h4>
+                    <p>REWARD: ৳25.00</p>
+                </div>
+            </div>
+            <button class="action-btn watch-btn" id="sp-task3" onclick="startTask('sp-task3', 25)">WATCH</button>
+        </div>
+
+        <div class="section-title">স্পেশাল টাস্ক (ডেইলি ৫)</div>
+
+        <div class="glass-card simple-task-row">
+            <span class="simple-task-name">টাস্ক - ১</span>
+            <span class="simple-task-reward">৳৫০.০০</span>
+            <button class="simple-task-btn" id="daily-task1" onclick="startTask('daily-task1', 50)">টাস্ক দেখুন</button>
+        </div>
+
+        <div class="glass-card simple-task-row">
+            <span class="simple-task-name">টাস্ক - ২</span>
+            <span class="simple-task-reward">৳৫০.০০</span>
+            <button class="simple-task-btn" id="daily-task2" onclick="startTask('daily-task2', 50)">টাস্ক দেখুন</button>
+        </div>
+
+        <div class="glass-card simple-task-row">
+            <span class="simple-task-name">টাস্ক - ৩</span>
+            <span class="simple-task-reward">৳৫০.০০</span>
+            <button class="simple-task-btn" id="daily-task3" onclick="startTask('daily-task3', 50)">টাস্ক দেখুন</button>
+        </div>
+
+        <div class="glass-card simple-task-row">
+            <span class="simple-task-name">টাস্ক - ৪</span>
+            <span class="simple-task-reward">৳৫০.০০</span>
+            <button class="simple-task-btn" id="daily-task4" onclick="startTask('daily-task4', 50)">টাস্ক দেখুন</button>
+        </div>
+
+        <div class="glass-card simple-task-row">
+            <span class="simple-task-name">টাস্ক - ৫</span>
+            <span class="simple-task-reward">৳৫০.০০</span>
+            <button class="simple-task-btn" id="daily-task5" onclick="startTask('daily-task5', 50)">টাস্ক দেখুন</button>
+        </div>
+
+        <div style="height: 90px;"></div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>হোম</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>রেফার</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-solid fa-wallet"></i>
+                <span>উত্তোলন</span>
+            </div>
+            <div class="nav-item">
+                <i class="fa-solid fa-user"></i>
+                <span>প্রোফাইল</span>
             </div>
         </div>
-        <button onclick="startTask(this, 25.00, 'https://t.me/+GxE45tmJDgNjNDc1')">JOIN NOW</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-regular fa-circle-play"></i>
-            <div>
-                <h4>SPONSOR</h4>
-                <p>Reward: ৳0.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 0.00, '#')">WATCH NOW</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-regular fa-circle-play"></i>
-            <div>
-                <h4>কাজ বুঝতে ভিডিও দেখুন</h4>
-            </div>
-        </div>
-        <button onclick="startTask(this, 0.00, '#')">WATCH NOW</button>
-    </div>
-
-    <div class="ad-section">
-
-        <div class="ad-card">
-            <i class="fa-regular fa-circle-play"></i>
-            <h3>অ্যাড স্লট ১</h3>
-            <p class="reward">+৳15.00</p>
-            <small>Used: 0/10</small>
-            <button onclick="startTask(this, 15.00, 'https://omg10.com/4/11131720')">WATCH</button>
-        </div>
-
-        <div class="ad-card">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>অ্যাড স্লট ২</h3>
-            <p class="reward reward2">+৳15.00</p>
-            <small>Used: 0/10</small>
-            <button onclick="startTask(this, 15.00, 'https://omg10.com/4/11131822')">WATCH</button>
-        </div>
 
     </div>
 
-    <h3 class="section-title">
-        SPECIAL WEB TASKS (DAILY 5)
-    </h3>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-solid fa-link"></i>
-            <div>
-                <h4>টাস্ক - ১</h4>
-                <p>+৳25.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131725')">বিজ্ঞাপন দেখুন</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-solid fa-link"></i>
-            <div>
-                <h4>টাস্ক - ২</h4>
-                <p>+৳25.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131724')">বিজ্ঞাপন দেখুন</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-solid fa-link"></i>
-            <div>
-                <h4>টাস্ক - ৩</h4>
-                <p>+৳25.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131723')">বিজ্ঞাপন দেখুন</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-solid fa-link"></i>
-            <div>
-                <h4>টাস্ক - ৪</h4>
-                <p>+৳25.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131722')">বিজ্ঞাপন দেখুন</button>
-    </div>
-
-    <div class="task-box">
-        <div class="left">
-            <i class="fa-solid fa-link"></i>
-            <div>
-                <h4>টাস্ক - ৫</h4>
-                <p>+৳25.00</p>
-            </div>
-        </div>
-        <button onclick="startTask(this, 25.00, 'https://omg10.com/4/11131721')">বিজ্ঞাপন দেখুন</button>
-    </div>
-
-</div>
-
-<div class="bottom-nav">
-
-    <a class="active">
-        <i class="fa-solid fa-house"></i>
-        <span>Home</span>
-    </a>
-
-    <a>
-        <i class="fa-solid fa-user-plus"></i>
-        <span>Refer</span>
-    </a>
-
-    <a>
-        <i class="fa-solid fa-wallet"></i>
-        <span>Withdraw</span>
-    </a>
-
-    <a>
-        <i class="fa-solid fa-user"></i>
-        <span>Profile</span>
-    </a>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
