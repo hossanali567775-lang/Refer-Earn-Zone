@@ -1,4 +1,4 @@
-// ১. ফায়ারবেস কনফিগারেশন (আপনার স্ক্রিনশট থেকে নেওয়া শতভাগ সঠিক কোড)
+// ১. ফায়ারবেস কনফিগারেশন 
 const firebaseConfig = {
   apiKey: "AIzaSyA0iU2q_AVn78ICFMjbISJKXhZYkuph4Cw",
   authDomain: "refer-earn-zone.firebaseapp.com",
@@ -10,7 +10,6 @@ const firebaseConfig = {
   measurementId: "G-WWCVYZQY9P"
 };
 
-// ফায়ারবেস ইনিশিয়ালাইজ করা
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -31,25 +30,26 @@ if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
 
 const userRef = database.ref('users/' + userId);
 let currentGlobalBalance = 0; 
+let currentGlobalRefers = 0; 
 
-// ৩. রিয়াল-টাইম ডেটাবেস লিসেনার (ডাটা অটো আপডেট হবে)
+// ৩. রিয়াল-টাইম ইউজার ডাটা লিসেনার
 userRef.on('value', (snapshot) => {
     const data = snapshot.val();
     if (data) {
         currentGlobalBalance = data.balance || 0;
+        currentGlobalRefers = data.referred || 0;
         
-        // হোম পেজের ডাটা
+        // হোম পেজ আপডেট
         document.getElementById('balance-amount').innerText = "৳ " + currentGlobalBalance.toFixed(2);
-        document.getElementById('referred-count').innerText = data.referred || 0;
+        document.getElementById('referred-count').innerText = currentGlobalRefers;
         document.getElementById('pending-count').innerText = data.pending || 0;
         
-        // প্রোফাইল পেজের ডাটা
+        // প্রোফাইল পেজ আপডেট
         document.getElementById('profile-name').innerText = data.name || userName;
         document.getElementById('profile-id').innerText = "ID: " + userId;
         document.getElementById('profile-balance').innerText = "৳ " + currentGlobalBalance.toFixed(2);
-        document.getElementById('profile-refers').innerText = data.referred || 0;
+        document.getElementById('profile-refers').innerText = currentGlobalRefers;
     } else {
-        // নতুন ইউজারের জন্য ডেটাবেস প্রোফাইল তৈরি
         userRef.set({
             name: userName,
             balance: 0,
@@ -59,11 +59,51 @@ userRef.on('value', (snapshot) => {
     }
 });
 
-// আপনার টেলিগ্রাম বটের ইউজারনেমটি "ReferEarnZoneBot" এর জায়গায় বসাতে পারেন
+// ৪. রিয়াল-টাইম উইথড্র হিস্টোরি লিসেনার (ইউজারের নিজস্ব ট্রানজেকশন দেখাবে)
+database.ref('user_withdrawals/' + userId).on('value', (snapshot) => {
+    const historyContainer = document.getElementById('withdraw-history-list');
+    historyContainer.innerHTML = ""; // আগের ডিফল্ট টেক্সট মুছে ফেলা
+    
+    const data = snapshot.val();
+    if (data) {
+        // নতুন রিকোয়েস্ট সবার উপরে দেখানোর জন্য রিভার্স করা হয়েছে
+        const keys = Object.keys(data).reverse();
+        keys.forEach(key => {
+            const item = data[key];
+            let statusClass = "status-pending";
+            let statusText = "পেন্ডিং";
+            
+            if(item.status === "Approved" || item.status === "Success") {
+                statusClass = "status-approved";
+                statusText = "সফল";
+            } else if(item.status === "Rejected") {
+                statusClass = "status-rejected";
+                statusText = "বাতিল";
+            }
+            
+            const itemHtml = `
+                <div class="history-item">
+                    <div class="history-left">
+                        <h5>${item.method} (${item.number})</h5>
+                        <span>${item.time}</span>
+                    </div>
+                    <div class="history-right">
+                        <div class="history-amount">৳${item.amount}</div>
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                    </div>
+                </div>
+            `;
+            historyContainer.innerHTML += itemHtml;
+        });
+    } else {
+        historyContainer.innerHTML = `<p style="font-size: 11px; color: #7683be; text-align: center; padding: 15px;">কোনো হিস্টোরি পাওয়া যায়নি</p>`;
+    }
+});
+
 const BOT_USERNAME = "ReferEarnZoneBot"; 
 document.getElementById('refer-link-input').value = `https://t.me/${BOT_USERNAME}?start=${userId}`;
 
-// ৪. পেজ বা ট্যাব পরিবর্তনের ফাংশন
+// ৫. পেজ বা ট্যাব পরিবর্তনের ফাংশন
 function switchTab(buttonIndex, tabId) {
     const tabs = document.querySelectorAll('.tab-content');
     tabs.forEach(tab => tab.classList.remove('active'));
@@ -75,7 +115,7 @@ function switchTab(buttonIndex, tabId) {
     buttons[buttonIndex].classList.add('active');
 }
 
-// ৫. রেফার লিংক কপি ফাংশন
+// ৬. রেফার লিংক কপি ফাংশন
 function copyReferLink() {
     const copyText = document.getElementById('refer-link-input');
     copyText.select();
@@ -86,39 +126,55 @@ function copyReferLink() {
     else alert("আপনার রেফার লিংকটি কপি হয়েছে!");
 }
 
-// ৬. উইথড্র (টাকা উত্তোলন) ফাংশন
+// ৭. নতুন উইথড্র লজিক (কমপক্ষে ৭০০ টাকা, এর উপর আনলিমিটেড)
 function requestWithdraw() {
     const method = document.getElementById('withdraw-method').value;
     const number = document.getElementById('withdraw-number').value;
     const amount = parseFloat(document.getElementById('withdraw-amount').value);
     
-    if (!number || isNaN(amount) || amount < 100) {
-        if(tg) tg.showAlert("দয়া করে সঠিক নাম্বার এবং নূন্যতম ৳১০০ পরিমাণ লিখুন।");
-        else alert("দয়া করে সঠিক নাম্বার এবং নূন্যতম ৳১০০ পরিমাণ লিখুন।");
+    // ৭০০ টাকার কম হলে আটকে দেবে
+    if (!number || isNaN(amount) || amount < 700) {
+        const errorMsg = "দয়া করে সঠিক নাম্বার দিন এবং নূন্যতম ৳৭০০ উত্তোলন করার চেষ্টা করুন।";
+        if(tg) tg.showAlert(errorMsg); else alert(errorMsg);
+        return;
+    }
+
+    // ১০টি রেফার না থাকলে আটকে দেবে
+    if (currentGlobalRefers < 10) {
+        const referAlert = `টাকা তুলতে কমপক্ষে ১০টি রেফার প্রয়োজন। আপনার বর্তমান রেফার: ${currentGlobalRefers}টি।`;
+        if(tg) tg.showAlert(referAlert); else alert(referAlert);
         return;
     }
     
+    // ব্যালেন্স পর্যাপ্ত থাকলে রিকোয়েস্ট সাবমিট হবে
     if (currentGlobalBalance >= amount) {
-        // ইউজারের ব্যালেন্স থেকে টাকা মাইনাস করা
+        // ব্যালেন্স কাটা
         userRef.child('balance').transaction((currentBalance) => {
             return (currentBalance || 0) - amount;
         });
         
-        // অ্যাডমিন প্যানেলে (Database) রিকোয়েস্ট পাঠানো
-        database.ref('withdrawals').push({
-            userId: userId,
-            name: userName,
+        const withdrawData = {
             method: method,
             number: number,
             amount: amount,
             status: "Pending",
             time: new Date().toLocaleString()
+        };
+
+        // ১. ইউজারের নিজের হিস্টোরি বক্সে সেভ হবে
+        database.ref('user_withdrawals/' + userId).push(withdrawData);
+        
+        // ২. অ্যাডমিন প্যানেলে (Database) রিকোয়েস্ট যাবে যাতে আপনি দেখতে পারেন
+        database.ref('admin_withdrawals').push({
+            userId: userId,
+            name: userName,
+            ...withdrawData
         });
         
         document.getElementById('withdraw-number').value = "";
         document.getElementById('withdraw-amount').value = "";
         
-        if(tg) tg.showAlert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে! ২৪ ঘণ্টার মধ্যে পেমেন্ট পেয়ে যাবেন।`);
+        if(tg) tg.showAlert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে! হিস্টোরিতে লক্ষ্য রাখুন।`);
         else alert(`আপনার ৳${amount} উত্তোলনের অনুরোধটি সফল হয়েছে!`);
     } else {
         if(tg) tg.showAlert("আপনার অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স নেই!");
@@ -126,7 +182,7 @@ function requestWithdraw() {
     }
 }
 
-// ৭. লিংক ওপেনিং এবং টাস্ক কাউন্টডাউন
+// ৮. লিংক ওপেনিং এবং টাস্ক কাউন্টডাউন
 function startTask(buttonId, rewardAmount, targetUrl) {
     if (tg) {
         if (targetUrl.includes("t.me")) tg.openTelegramLink(targetUrl);
@@ -147,7 +203,6 @@ function startTask(buttonId, rewardAmount, targetUrl) {
             btn.style.background = "#00ffaa";
             btn.style.color = "#000";
             
-            // ডেটাবেসে ব্যালেন্স যোগ করা
             userRef.child('balance').transaction((currentBalance) => {
                 return (currentBalance || 0) + rewardAmount;
             });
