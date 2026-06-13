@@ -1,98 +1,136 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refer Earn Zone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Earn Zone</title>
+
     <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
+
 <body>
 
-    <div class="bg-pulse-networks"></div>
+<div class="container">
 
-    <div class="app-container">
-        
-        <div class="app-header">
-            <button class="header-circle-btn"><i class="fa-solid fa-xmark"></i></button>
-            <h2 class="app-title">Refer Earn Zone</h2>
-            <button class="header-circle-btn"><i class="fa-solid fa-ellipsis"></i></button>
+    <!-- Top -->
+    <div class="top-card">
+        <h1>💸 Earn Zone</h1>
+        <p>Earn Daily Rewards System</p>
+    </div>
+
+    <!-- Balance -->
+    <div class="balance-card">
+        <h3>Main Balance</h3>
+        <h2 id="balance">0 ৳</h2>
+    </div>
+
+    <div class="balance-card">
+        <h3>Referral Balance</h3>
+        <h2 id="refBalance">0 ৳</h2>
+    </div>
+
+    <div class="balance-card">
+        <h3>Total Balance</h3>
+        <h2 id="totalBalance">0 ৳</h2>
+    </div>
+
+    <!-- GROUP TASK -->
+    <div class="section">
+        <h2>📢 Join Groups</h2>
+
+        <div class="task">
+            <span>Payment Group (+35৳)</span>
+            <button id="paymentBtn" onclick="joinGroup('payment')">Join</button>
         </div>
 
-        <div id="home-tab" class="tab-content active">
-            <div class="glass-card balance-card">
-                <div class="balance-label">মোট ব্যালেন্স</div>
-                <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
-                <div class="card-meta-labels">
-                    <span>RECENT REWARDS:</span>
-                    <span>PENDING DATA POINTS</span>
-                </div>
-                <div class="stats-container-row">
-                    <div class="stat-box-left">
-                        <span class="stat-title">REFERRED FRIENDS:</span>
-                        <span id="referred-count" class="stat-value">0</span>
-                    </div>
-                    <div class="live-pulse-wrapper">
-                        <div class="pulse-glow-ring"></div>
-                        <div class="pulse-center-content">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <span>LIVE UPDATES</span>
-                        </div>
-                    </div>
-                    <div class="stat-box-right">
-                        <span class="stat-title">PENDING APPROVAL:</span>
-                        <span id="pending-count" class="stat-value">0</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-divider-title">JOIN & EARN (SPECIAL REWARDS)</div>
-            <div class="glass-card premium-task-card">
-                <div class="task-left-block">
-                    <div class="neon-icon-holder purple-glow"><i class="fa-solid fa-comments"></i></div>
-                    <div class="task-details"><h4>OFFICIAL SUPPORT GROUP</h4><p>REWARD: ৳৩৫.০০</p></div>
-                </div>
-                <button class="premium-gradient-btn purple-grad" id="sp-task1" onclick="startTask('sp-task1', 35, 'https://t.me/+-JhqvcZQxEY1YTI1')">যোগ দিন এখনই</button>
-            </div>
-        </div>
-
-        <div id="refer-tab" class="tab-content">
-            <div class="glass-card text-center-card">
-                <div class="neon-icon-holder purple-glow center-icon"><i class="fa-solid fa-user-plus"></i></div>
-                <h3 class="tab-page-title">বন্ধুদের আমন্ত্রণ জানান</h3>
-                <p class="tab-page-desc">প্রতিটি সফল রেফারের জন্য আপনি পাবেন তাৎক্ষণিক <strong style="color: #00ffaa;">৳১৫.০০</strong> বোনাস!</p>
-                
-                <div class="referral-link-box">
-                    <input type="text" id="refer-link-input" readonly value="লোডিং...">
-                    <button onclick="copyReferLink()"><i class="fa-solid fa-copy"></i> কপি</button>
-                </div>
-            </div>
-
-            <div class="section-divider-title" style="margin-top: 20px;">রেফার হিস্টোরি (REFERRAL LIST)</div>
-            <div id="referral-history-list">
-                <p style="font-size: 11px; color: #7683be; text-align: center; padding: 15px;">লোডিং হচ্ছে...</p>
-            </div>
-        </div>
-
-        <div id="withdraw-tab" class="tab-content">
-            </div>
-
-        <div id="profile-tab" class="tab-content">
-            </div>
-
-        <div style="height: 110px;"></div>
-
-        <div class="premium-navbar">
-            <div class="nav-button active" onclick="switchTab(0, 'home-tab')"><i class="fa-solid fa-house"></i><span>হোম</span></div>
-            <div class="nav-button" onclick="switchTab(1, 'refer-tab')"><i class="fa-solid fa-user-plus"></i><span>রেফার</span></div>
-            <div class="nav-button" onclick="switchTab(2, 'withdraw-tab')"><i class="fa-solid fa-wallet"></i><span>উত্তোলন</span></div>
-            <div class="nav-button" onclick="switchTab(3, 'profile-tab')"><i class="fa-solid fa-user"></i><span>প্রোফাইল</span></div>
+        <div class="task">
+            <span>Support Group (+35৳)</span>
+            <button id="supportBtn" onclick="joinGroup('support')">Join</button>
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <script src="script.js"></script>
+    <!-- ADS -->
+    <div class="section">
+        <h2>🎥 Ad Slots</h2>
+
+        <div class="task">
+            <span>Ad Slot 1</span>
+            <small id="ad1Count">Used 0/10</small>
+            <button onclick="watchAd(1)">Watch</button>
+        </div>
+
+        <div class="task">
+            <span>Ad Slot 2</span>
+            <small id="ad2Count">Used 0/10</small>
+            <button onclick="watchAd(2)">Watch</button>
+        </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="section">
+        <h2>✅ Daily Tasks</h2>
+
+        <div class="task"><span>Task 1 (+25৳)</span><button onclick="doTask(1)">Start</button></div>
+        <div class="task"><span>Task 2 (+25৳)</span><button onclick="doTask(2)">Start</button></div>
+        <div class="task"><span>Task 3 (+25৳)</span><button onclick="doTask(3)">Start</button></div>
+        <div class="task"><span>Task 4 (+25৳)</span><button onclick="doTask(4)">Start</button></div>
+        <div class="task"><span>Task 5 (+25৳)</span><button onclick="doTask(5)">Start</button></div>
+    </div>
+
+    <!-- REFERRAL -->
+    <div class="section">
+        <h2>👥 Referral System</h2>
+
+        <input type="text" id="refLink" readonly placeholder="Your Referral Link">
+
+        <button onclick="copyRef()">Copy Link</button>
+
+        <h3>Referral History</h3>
+        <div id="refHistory">No referrals yet</div>
+    </div>
+
+    <!-- WITHDRAW -->
+    <div class="section">
+        <h2>💰 Withdraw</h2>
+
+        <div class="notice">
+            ⚠️ Minimum 10 Referrals + 600৳ Required
+        </div>
+
+        <input type="text" id="withdrawNumber" placeholder="Bkash/Nagad Number">
+        <input type="number" id="withdrawAmount" placeholder="Amount">
+
+        <button onclick="withdraw()">Withdraw</button>
+
+        <h3>Withdraw History</h3>
+        <div id="withdrawHistory">No history</div>
+    </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+
+    <div class="nav-item active" onclick="goPage('home')">
+        🏠<br>Home
+    </div>
+
+    <div class="nav-item" onclick="goPage('refer')">
+        👥<br>Refer
+    </div>
+
+    <div class="nav-item" onclick="goPage('withdraw')">
+        💰<br>Withdraw
+    </div>
+
+    <div class="nav-item" onclick="goPage('profile')">
+        👤<br>Profile
+    </div>
+
+</div>
+
+<script type="module" src="script.js"></script>
+
 </body>
 </html>
