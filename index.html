@@ -35,6 +35,9 @@
         <h2 id="totalBalance">0 ৳</h2>
     </div>
 
+    <!-- HOME PAGE -->
+<div id="homePage" class="page">
+
     <!-- GROUP TASK -->
     <div class="section">
         <h2>📢 Join Groups</h2>
@@ -55,13 +58,13 @@
         <h2>🎥 Ad Slots</h2>
 
         <div class="task">
-            <span>Ad Slot 1</span>
+            <span>Ad Slot 1 (+25৳)</span>
             <small id="ad1Count">Used 0/10</small>
             <button onclick="watchAd(1)">Watch</button>
         </div>
 
         <div class="task">
-            <span>Ad Slot 2</span>
+            <span>Ad Slot 2 (+25৳)</span>
             <small id="ad2Count">Used 0/10</small>
             <button onclick="watchAd(2)">Watch</button>
         </div>
@@ -78,7 +81,11 @@
         <div class="task"><span>Task 5 (+25৳)</span><button onclick="doTask(5)">Start</button></div>
     </div>
 
-    <!-- REFERRAL -->
+</div>
+
+<!-- REFER PAGE -->
+<div id="referPage" class="page" style="display:none">
+
     <div class="section">
         <h2>👥 Referral System</h2>
 
@@ -86,15 +93,73 @@
 
         <button onclick="copyRef()">Copy Link</button>
 
+        <div class="balance-card">
+            <h3>Referral Balance</h3>
+            <h2 id="refBalancePage">0 ৳</h2>
+        </div>
+
         <h3>Referral History</h3>
-        <div id="refHistory">No referrals yet</div>
+
+        <div id="refHistory">
+            No referrals yet
+        </div>
     </div>
 
-    <!-- WITHDRAW -->
+</div>
+
+<!-- WITHDRAW PAGE -->
+<div id="withdrawPage" class="page" style="display:none">
+
     <div class="section">
         <h2>💰 Withdraw</h2>
 
         <div class="notice">
+            ⚠️ Minimum 10 Referrals + 600৳ Required
+        </div>
+
+        <input type="text" id="withdrawNumber" placeholder="Bkash/Nagad Number">
+
+        <input type="number" id="withdrawAmount" placeholder="Amount">
+
+        <button onclick="withdraw()">
+            Withdraw
+        </button>
+
+        <h3>Withdraw History</h3>
+
+        <div id="withdrawHistory">
+            No history
+        </div>
+    </div>
+
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="profilePage" class="page" style="display:none">
+
+    <div class="section">
+
+        <h2>👤 Profile</h2>
+
+        <div class="balance-card">
+            <h3>User ID</h3>
+            <p id="userId">Loading...</p>
+        </div>
+
+        <div class="balance-card">
+            <h3>Main Balance</h3>
+            <h2 id="profileBalance">0 ৳</h2>
+        </div>
+
+        <div class="balance-card">
+            <h3>Total Balance</h3>
+            <h2 id="profileTotal">0 ৳</h2>
+        </div>
+
+    </div>
+
+</div>
+       <div class="notice">
             ⚠️ Minimum 10 Referrals + 600৳ Required
         </div>
 
