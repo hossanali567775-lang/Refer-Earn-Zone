@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn Zone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earn Zone</title>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 
 <body>
 
+<!-- MAIN CONTAINER -->
 <div class="container">
 
-    <!-- Top -->
+    <!-- HEADER -->
     <div class="top-card">
         <h1>💸 Earn Zone</h1>
         <p>Earn Daily Rewards System</p>
     </div>
 
-    <!-- Balance -->
+    <!-- BALANCE SECTION -->
     <div class="balance-card">
         <h3>Main Balance</h3>
         <h2 id="balance">0 ৳</h2>
@@ -34,22 +35,24 @@
         <h3>Total Balance</h3>
         <h2 id="totalBalance">0 ৳</h2>
     </div>
+    <!-- HOME PAGE CONTENT START -->
 
-    <!-- HOME PAGE -->
-<div id="homePage" class="page">
-
-    <!-- GROUP TASK -->
+    <!-- GROUPS -->
     <div class="section">
         <h2>📢 Join Groups</h2>
 
         <div class="task">
             <span>Payment Group (+35৳)</span>
-            <button id="paymentBtn" onclick="joinGroup('payment')">Join</button>
+            <button id="paymentBtn" onclick="joinGroup('payment')">
+                Join
+            </button>
         </div>
 
         <div class="task">
             <span>Support Group (+35৳)</span>
-            <button id="supportBtn" onclick="joinGroup('support')">Join</button>
+            <button id="supportBtn" onclick="joinGroup('support')">
+                Join
+            </button>
         </div>
     </div>
 
@@ -81,100 +84,83 @@
         <div class="task"><span>Task 5 (+25৳)</span><button onclick="doTask(5)">Start</button></div>
     </div>
 
-</div>
+    <!-- HOME PAGE CONTENT END -->
+   <!-- REFER PAGE -->
+    <div id="referPage" class="page" style="display:none;">
 
-<!-- REFER PAGE -->
-<div id="referPage" class="page" style="display:none">
+        <div class="section">
+            <h2>👥 Referral System</h2>
 
-    <div class="section">
-        <h2>👥 Referral System</h2>
+            <input type="text" id="refLink" readonly placeholder="Your Referral Link">
 
-        <input type="text" id="refLink" readonly placeholder="Your Referral Link">
+            <button onclick="copyRef()">Copy Link</button>
 
-        <button onclick="copyRef()">Copy Link</button>
+            <div class="balance-card">
+                <h3>Referral Balance</h3>
+                <h2 id="refBalancePage">0 ৳</h2>
+            </div>
 
-        <div class="balance-card">
-            <h3>Referral Balance</h3>
-            <h2 id="refBalancePage">0 ৳</h2>
-        </div>
-
-        <h3>Referral History</h3>
-
-        <div id="refHistory">
-            No referrals yet
-        </div>
-    </div>
-
-</div>
-
-<!-- WITHDRAW PAGE -->
-<div id="withdrawPage" class="page" style="display:none">
-
-    <div class="section">
-        <h2>💰 Withdraw</h2>
-
-        <div class="notice">
-            ⚠️ Minimum 10 Referrals + 600৳ Required
-        </div>
-
-        <input type="text" id="withdrawNumber" placeholder="Bkash/Nagad Number">
-
-        <input type="number" id="withdrawAmount" placeholder="Amount">
-
-        <button onclick="withdraw()">
-            Withdraw
-        </button>
-
-        <h3>Withdraw History</h3>
-
-        <div id="withdrawHistory">
-            No history
-        </div>
-    </div>
-
-</div>
-
-<!-- PROFILE PAGE -->
-<div id="profilePage" class="page" style="display:none">
-
-    <div class="section">
-
-        <h2>👤 Profile</h2>
-
-        <div class="balance-card">
-            <h3>User ID</h3>
-            <p id="userId">Loading...</p>
-        </div>
-
-        <div class="balance-card">
-            <h3>Main Balance</h3>
-            <h2 id="profileBalance">0 ৳</h2>
-        </div>
-
-        <div class="balance-card">
-            <h3>Total Balance</h3>
-            <h2 id="profileTotal">0 ৳</h2>
+            <h3>Referral History</h3>
+            <div id="refHistory">
+                No referrals yet
+            </div>
         </div>
 
     </div>
 
-</div>
-       <div class="notice">
-            ⚠️ Minimum 10 Referrals + 600৳ Required
+    <!-- WITHDRAW PAGE -->
+    <div id="withdrawPage" class="page" style="display:none;">
+
+        <div class="section">
+            <h2>💰 Withdraw</h2>
+
+            <div class="notice">
+                ⚠️ Minimum 10 Referrals + 600৳ Required
+            </div>
+
+            <input type="text" id="withdrawNumber" placeholder="Bkash / Nagad Number">
+
+            <input type="number" id="withdrawAmount" placeholder="Amount">
+
+            <button onclick="withdraw()">
+                Withdraw Request
+            </button>
+
+            <h3>Withdraw History</h3>
+
+            <div id="withdrawHistory">
+                No history
+            </div>
         </div>
 
-        <input type="text" id="withdrawNumber" placeholder="Bkash/Nagad Number">
-        <input type="number" id="withdrawAmount" placeholder="Amount">
-
-        <button onclick="withdraw()">Withdraw</button>
-
-        <h3>Withdraw History</h3>
-        <div id="withdrawHistory">No history</div>
     </div>
 
-</div>
+    <!-- PROFILE PAGE -->
+    <div id="profilePage" class="page" style="display:none;">
 
-<!-- BOTTOM NAV -->
+        <div class="section">
+
+            <h2>👤 Profile</h2>
+
+            <div class="balance-card">
+                <h3>User ID</h3>
+                <p id="userId">Loading...</p>
+            </div>
+
+            <div class="balance-card">
+                <h3>Main Balance</h3>
+                <h2 id="profileBalance">0 ৳</h2>
+            </div>
+
+            <div class="balance-card">
+                <h3>Total Balance</h3>
+                <h2 id="profileTotal">0 ৳</h2>
+            </div>
+
+        </div>
+
+    </div> 
+    <!-- BOTTOM NAVIGATION -->
 <div class="bottom-nav">
 
     <div class="nav-item active" onclick="goPage('home')">
@@ -195,7 +181,25 @@
 
 </div>
 
+<!-- SCRIPT -->
 <script type="module" src="script.js"></script>
+
+<script>
+function goPage(page){
+
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("referPage").style.display = "none";
+    document.getElementById("withdrawPage").style.display = "none";
+    document.getElementById("profilePage").style.display = "none";
+
+    document.getElementById(page + "Page").style.display = "block";
+
+    document.querySelectorAll(".nav-item")
+    .forEach(e => e.classList.remove("active"));
+
+    event.currentTarget.classList.add("active");
+}
+</script>
 
 </body>
 </html>
