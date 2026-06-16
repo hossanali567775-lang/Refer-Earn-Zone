@@ -1,205 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earn Zone</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer Earn Zone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<!-- MAIN CONTAINER -->
-<div class="container">
-
-    <!-- HEADER -->
-    <div class="top-card">
-        <h1>💸 Earn Zone</h1>
-        <p>Earn Daily Rewards System</p>
-    </div>
-
-    <!-- BALANCE SECTION -->
-    <div class="balance-card">
-        <h3>Main Balance</h3>
-        <h2 id="balance">0 ৳</h2>
-    </div>
-
-    <div class="balance-card">
-        <h3>Referral Balance</h3>
-        <h2 id="refBalance">0 ৳</h2>
-    </div>
-
-    <div class="balance-card">
-        <h3>Total Balance</h3>
-        <h2 id="totalBalance">0 ৳</h2>
-    </div>
-    <!-- HOME PAGE CONTENT START -->
-
-    <!-- GROUPS -->
-    <div class="section">
-        <h2>📢 Join Groups</h2>
-
-        <div class="task">
-            <span>Payment Group (+35৳)</span>
-            <button id="paymentBtn" onclick="joinGroup('payment')">
-                Join
-            </button>
+    <div class="app-container">
+        <div class="app-header">
+            <h2 class="app-title">Refer Earn Zone</h2>
+        </div>
+        <div id="home-tab" class="tab-content active">
+            <div class="glass-card">
+                <div class="balance-label">মোট ব্যালেন্স</div>
+                <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
+            </div>
+            <div class="section-divider-title">স্পেশাল টাস্ক (৳৩৫)</div>
+            <button class="premium-gradient-btn" onclick="startTask('t1', 35, 'https://t.me/+-JhqvcZQxEY1YTI1')">সাপোর্ট গ্রুপ</button>
+            <button class="premium-gradient-btn" onclick="startTask('t2', 35, 'https://t.me/+GxE45tmJDgNjNDc1')">পেমেন্ট প্রুফ</button>
+            <div class="section-divider-title">অ্যাড স্লট (৳২৫)</div>
+            <button class="premium-gradient-btn" onclick="startTask('a1', 25, 'https://omg10.com/4/11131725')">অ্যাড স্লট ১</button>
+            <button class="premium-gradient-btn" onclick="startTask('a2', 25, 'https://omg10.com/4/11131822')">অ্যাড স্লট ২</button>
+            <div class="section-divider-title">ডেইলি টাস্ক (৳২৫)</div>
+            <button class="premium-gradient-btn" onclick="startTask('d1', 25, 'https://omg10.com/4/11131721')">টাস্ক ১</button>
+            <button class="premium-gradient-btn" onclick="startTask('d2', 25, 'https://omg10.com/4/11131722')">টাস্ক ২</button>
+            <button class="premium-gradient-btn" onclick="startTask('d3', 25, 'https://omg10.com/4/11131720')">টাস্ক ৩</button>
+            <button class="premium-gradient-btn" onclick="startTask('d4', 25, 'https://omg10.com/4/11131723')">টাস্ক ৪</button>
+            <button class="premium-gradient-btn" onclick="startTask('d5', 25, 'https://omg10.com/4/11131724')">টাস্ক ৫</button>
         </div>
 
-        <div class="task">
-            <span>Support Group (+35৳)</span>
-            <button id="supportBtn" onclick="joinGroup('support')">
-                Join
-            </button>
+        <div id="refer-tab" class="tab-content">
+            <h3>বন্ধুদের আমন্ত্রণ জানান</h3>
+            <p>প্রতি সফল রেফারে ৳১৫ বোনাস!</p>
+            <input type="text" id="refer-link-input" readonly>
+            <button onclick="copyReferLink()">কপি করুন</button>
+            <div id="referral-history-list"></div>
         </div>
-    </div>
-
-    <!-- ADS -->
-    <div class="section">
-        <h2>🎥 Ad Slots</h2>
-
-        <div class="task">
-            <span>Ad Slot 1 (+25৳)</span>
-            <small id="ad1Count">Used 0/10</small>
-            <button onclick="watchAd(1)">Watch</button>
+        <div id="withdraw-tab" class="tab-content">
+            <p style="color:red;">নোট: ১০টি রেফার ও নূন্যতম ৳৬০০ থাকতে হবে।</p>
+            <input type="number" id="withdraw-amount" placeholder="৳৬০০ বা বেশি">
+            <button onclick="requestWithdraw()">উত্তোলন অনুরোধ</button>
+            <div id="withdraw-history-list"></div>
         </div>
 
-        <div class="task">
-            <span>Ad Slot 2 (+25৳)</span>
-            <small id="ad2Count">Used 0/10</small>
-            <button onclick="watchAd(2)">Watch</button>
-        </div>
-    </div>
-
-    <!-- TASKS -->
-    <div class="section">
-        <h2>✅ Daily Tasks</h2>
-
-        <div class="task"><span>Task 1 (+25৳)</span><button onclick="doTask(1)">Start</button></div>
-        <div class="task"><span>Task 2 (+25৳)</span><button onclick="doTask(2)">Start</button></div>
-        <div class="task"><span>Task 3 (+25৳)</span><button onclick="doTask(3)">Start</button></div>
-        <div class="task"><span>Task 4 (+25৳)</span><button onclick="doTask(4)">Start</button></div>
-        <div class="task"><span>Task 5 (+25৳)</span><button onclick="doTask(5)">Start</button></div>
-    </div>
-
-    <!-- HOME PAGE CONTENT END -->
-   <!-- REFER PAGE -->
-    <div id="referPage" class="page" style="display:none;">
-
-        <div class="section">
-            <h2>👥 Referral System</h2>
-
-            <input type="text" id="refLink" readonly placeholder="Your Referral Link">
-
-            <button onclick="copyRef()">Copy Link</button>
-
-            <div class="balance-card">
-                <h3>Referral Balance</h3>
-                <h2 id="refBalancePage">0 ৳</h2>
-            </div>
-
-            <h3>Referral History</h3>
-            <div id="refHistory">
-                No referrals yet
-            </div>
+        <div id="profile-tab" class="tab-content">
+            <h3>ইউজার প্রোফাইল</h3>
+            <p id="profile-name">নাম লোড হচ্ছে...</p>
+            <p id="profile-id">ID: লোড হচ্ছে...</p>
         </div>
 
-    </div>
-
-    <!-- WITHDRAW PAGE -->
-    <div id="withdrawPage" class="page" style="display:none;">
-
-        <div class="section">
-            <h2>💰 Withdraw</h2>
-
-            <div class="notice">
-                ⚠️ Minimum 10 Referrals + 600৳ Required
-            </div>
-
-            <input type="text" id="withdrawNumber" placeholder="Bkash / Nagad Number">
-
-            <input type="number" id="withdrawAmount" placeholder="Amount">
-
-            <button onclick="withdraw()">
-                Withdraw Request
-            </button>
-
-            <h3>Withdraw History</h3>
-
-            <div id="withdrawHistory">
-                No history
-            </div>
+        <div class="premium-navbar">
+            <div class="nav-button active" onclick="switchTab(0, 'home-tab')"><i class="fa-solid fa-house"></i><span>হোম</span></div>
+            <div class="nav-button" onclick="switchTab(1, 'refer-tab')"><i class="fa-solid fa-user-plus"></i><span>রেফার</span></div>
+            <div class="nav-button" onclick="switchTab(2, 'withdraw-tab')"><i class="fa-solid fa-wallet"></i><span>উত্তোলন</span></div>
+            <div class="nav-button" onclick="switchTab(3, 'profile-tab')"><i class="fa-solid fa-user"></i><span>প্রোফাইল</span></div>
         </div>
-
     </div>
-
-    <!-- PROFILE PAGE -->
-    <div id="profilePage" class="page" style="display:none;">
-
-        <div class="section">
-
-            <h2>👤 Profile</h2>
-
-            <div class="balance-card">
-                <h3>User ID</h3>
-                <p id="userId">Loading...</p>
-            </div>
-
-            <div class="balance-card">
-                <h3>Main Balance</h3>
-                <h2 id="profileBalance">0 ৳</h2>
-            </div>
-
-            <div class="balance-card">
-                <h3>Total Balance</h3>
-                <h2 id="profileTotal">0 ৳</h2>
-            </div>
-
-        </div>
-
-    </div> 
-    <!-- BOTTOM NAVIGATION -->
-<div class="bottom-nav">
-
-    <div class="nav-item active" onclick="goPage('home')">
-        🏠<br>Home
-    </div>
-
-    <div class="nav-item" onclick="goPage('refer')">
-        👥<br>Refer
-    </div>
-
-    <div class="nav-item" onclick="goPage('withdraw')">
-        💰<br>Withdraw
-    </div>
-
-    <div class="nav-item" onclick="goPage('profile')">
-        👤<br>Profile
-    </div>
-
-</div>
-
-<!-- SCRIPT -->
-<script type="module" src="script.js"></script>
-
-<script>
-function goPage(page){
-
-    document.getElementById("homePage").style.display = "none";
-    document.getElementById("referPage").style.display = "none";
-    document.getElementById("withdrawPage").style.display = "none";
-    document.getElementById("profilePage").style.display = "none";
-
-    document.getElementById(page + "Page").style.display = "block";
-
-    document.querySelectorAll(".nav-item")
-    .forEach(e => e.classList.remove("active"));
-
-    event.currentTarget.classList.add("active");
-}
-</script>
-
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
