@@ -1,7 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get, update, onValue } from "firebase/database";
-
-/* ================= FIREBASE ================= */
+// ১. ফায়ারবেস কনফিগারেশন
 const firebaseConfig = {
   apiKey: "AIzaSyA0iU2q_AVn78ICFMjbISJKXhZYkuph4Cw",
   authDomain: "refer-earn-zone.firebaseapp.com",
@@ -9,168 +6,92 @@ const firebaseConfig = {
   projectId: "refer-earn-zone",
   storageBucket: "refer-earn-zone.firebasestorage.app",
   messagingSenderId: "1035860948377",
-  appId: "1:1035860948377:web:5fc19e6fcc844cec6e4f08"
+  appId: "1:1035860948377:web:5fc19e6fcc844cec6e4f08",
+  measurementId: "G-WWCVYZQY9P"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 
-/* ================= USER ID ================= */
-let userId = localStorage.getItem("userId");
+// ২. টেলিগ্রাম SDK ও ইউজার সেটআপ
+const tg = window.Telegram?.WebApp;
+tg?.ready();
+tg?.expand();
 
-if (!userId) {
-    userId = "user_" + Math.floor(Math.random() * 999999999);
-    localStorage.setItem("userId", userId);
+let userId = tg?.initDataUnsafe?.user?.id || "guest_123";
+let userName = tg?.initDataUnsafe?.user?.first_name || "Guest";
+const userRef = database.ref('users/' + userId);
+
+// ৩. ডাটা লোডিং
+userRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+        document.getElementById('balance-amount').innerText = "৳ " + (data.balance || 0).toFixed(2);
+        document.getElementById('profile-name').innerText = data.name || userName;
+        document.getElementById('profile-id').innerText = "ID: " + userId;
+        
+        // রেফারেল লিস্ট লোড
+        loadReferralList();
+        // উইথড্র হিস্টোরি লোড
+        loadWithdrawHistory();
+    } else {
+        userRef.set({ name: userName, balance: 0, referred: 0 });
+    }
+});
+
+// ৪. ট্যাব সুইচিং
+function switchTab(buttonIndex, tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelectorAll('.nav-button')[buttonIndex].classList.add('active');
 }
 
-/* ================= CREATE USER ================= */
-function createUser() {
-    set(ref(db, "users/" + userId), {
-        balance: 0,
-        refBalance: 0,
-        ads1: 0,
-        ads2: 0,
-        referralCount: 0,
-        withdraws: []
-    });
+// ৫. টাস্ক লজিক
+function startTask(id, reward, url) {
+    tg ? tg.openLink(url) : window.open(url, '_blank');
+    setTimeout(() => {
+        userRef.child('balance').transaction(b => (b || 0) + reward);
+        alert("টাস্ক সফল! আপনি " + reward + " টাকা পেয়েছেন।");
+    }, 10000);
 }
-createUser();
 
-/* ================= LOAD DATA ================= */
-function loadData() {
-    const userRef = ref(db, "users/" + userId);
-
-    onValue(userRef, (snapshot) => {
-        if (snapshot.exists()) {
-            let data = snapshot.val();
-
-            let total = data.balance + data.refBalance;
-
-            document.getElementById("balance").innerText = data.balance + " ৳";
-            document.getElementById("refBalance").innerText = data.refBalance + " ৳";
-            document.getElementById("totalBalance").innerText = total + " ৳";
-
-            document.getElementById("ad1Count").innerText = "Used " + data.ads1 + "/10";
-            document.getElementById("ad2Count").innerText = "Used " + data.ads2 + "/10";
-        }
-    });
-}
-loadData();
-
-/* ================= JOIN GROUP ================= */
-window.joinGroup = function(type) {
-
-    let userRef = ref(db, "users/" + userId);
-
-    get(userRef).then(snapshot => {
-        let data = snapshot.val();
-
-        let updateData = {};
-
-        if (type === "payment") {
-            updateData.balance = data.balance + 35;
-            document.getElementById("paymentBtn").innerText = "✅ Joined";
-        }
-
-        if (type === "support") {
-            updateData.balance = data.balance + 35;
-            document.getElementById("supportBtn").innerText = "✅ Joined";
-        }
-
-        update(userRef, updateData);
-    });
-};
-
-/* ================= ADS ================= */
-window.watchAd = function(slot) {
-
-    let userRef = ref(db, "users/" + userId);
-
-    get(userRef).then(snapshot => {
-        let data = snapshot.val();
-
-        let updateData = {};
-
-        if (slot === 1 && data.ads1 < 10) {
-            updateData.ads1 = data.ads1 + 1;
-            updateData.balance = data.balance + 25;
-        }
-
-        if (slot === 2 && data.ads2 < 10) {
-            updateData.ads2 = data.ads2 + 1;
-            updateData.balance = data.balance + 25;
-        }
-
-        update(userRef, updateData);
-    });
-};
-
-/* ================= TASK ================= */
-window.doTask = function(id) {
-
-    let userRef = ref(db, "users/" + userId);
-
-    get(userRef).then(snapshot => {
-        let data = snapshot.val();
-
-        update(userRef, {
-            balance: data.balance + 25
-        });
-    });
-};
-
-/* ================= REF COPY ================= */
-window.copyRef = function() {
-
-    let link = window.location.origin + "?ref=" + userId;
-
+// ৬. রেফারেল ও উইথড্র লজিক
+function copyReferLink() {
+    const link = `https://t.me/ReferEarnZone23_bot?start=${userId}`;
     navigator.clipboard.writeText(link);
+    alert("রেফার লিংক কপি হয়েছে!");
+}
 
-    document.getElementById("refLink").value = link;
-
-    alert("Referral link copied!");
-};
-
-/* ================= WITHDRAW ================= */
-window.withdraw = function() {
-
-    let number = document.getElementById("withdrawNumber").value;
-    let amount = parseInt(document.getElementById("withdrawAmount").value);
-
-    let userRef = ref(db, "users/" + userId);
-
-    get(userRef).then(snapshot => {
-        let data = snapshot.val();
-
-        if (data.referralCount < 10 || data.balance < 600) {
-            alert("Minimum 10 referrals & 600৳ required");
-            return;
+function requestWithdraw() {
+    const amount = parseFloat(document.getElementById('withdraw-amount').value);
+    userRef.once('value', (snap) => {
+        const data = snap.val();
+        if ((data.referred || 0) < 10) {
+            alert("উত্তোলনের জন্য ১০টি রেফার প্রয়োজন!");
+        } else if (amount < 600) {
+            alert("নূন্যতম উত্তোলনের পরিমাণ ৬০০ টাকা!");
+        } else {
+            userRef.child('balance').transaction(b => (b || 0) - amount);
+            database.ref('withdrawals').push({ userId, amount, status: 'Pending', time: new Date().toLocaleString() });
+            alert("উত্তোলনের অনুরোধ সফল হয়েছে!");
         }
-
-        let newWithdraw = {
-            number,
-            amount,
-            time: new Date().toLocaleString()
-        };
-
-        let updatedList = data.withdraws || [];
-        updatedList.push(newWithdraw);
-
-        update(userRef, {
-            withdraws: updatedList,
-            balance: data.balance - amount
-        });
-
-        alert("Withdraw request sent!");
     });
-};
+}
 
-/* ================= NAV ================= */
-window.goPage = function(page) {
-    document.querySelectorAll(".nav-item")
-        .forEach(e => e.classList.remove("active"));
+// ৭. হিস্টোরি লোডার
+function loadReferralList() {
+    database.ref('users/' + userId + '/referred_users').on('value', (snap) => {
+        const list = document.getElementById('referral-history-list');
+        list.innerHTML = "";
+        snap.forEach(child => list.innerHTML += `<div>${child.val().name} - জয়েন করেছে</div>`);
+    });
+}
 
-    event.target.classList.add("active");
-
-    alert(page + " page (UI switch next upgrade)");
-};
+function loadWithdrawHistory() {
+    database.ref('withdrawals').orderByChild('userId').equalTo(userId).on('value', (snap) => {
+        const list = document.getElementById('withdraw-history-list');
+        list.innerHTML = "";
+        snap.forEach(child => list.innerHTML += `<div>৳${child.val().amount} - ${child.val().status}</div>`);
+    });
+}
