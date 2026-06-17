@@ -1,55 +1,19 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TK Income</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earn Zone</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <div id="home-tab" class="tab-content active">
-            <div class="glass-card">
-                <p>TOTAL BALANCE</p>
-                <h2 id="balance-amount">৳0.00</h2>
-            </div>
-            <div id="tasks-container"></div>
-        </div>
 
-        <div id="refer-tab" class="tab-content">
-            <div class="glass-card">
-                <h3>REFERRAL SYSTEM</h3>
-                <p><span id="total-joins">0</span> TOTAL JOINS</p>
-                <button class="btn-primary" onclick="copyReferLink()">লিংক কপি করুন</button>
-            </div>
-        </div>
+<h1>Earn Zone</h1>
 
-        <div id="withdraw-tab" class="tab-content">
-            <div class="glass-card">
-                <h3>PAYOUT DETAILS</h3>
-                <select id="method" class="input-field"><option>বিকাশ (Bkash)</option></select>
-                <input type="number" id="withdraw-amount" placeholder="পরিমাণ (৫০০+)" class="input-field">
-                <button class="btn-primary" onclick="requestWithdraw()">উইথড্র রিকোয়েস্ট পাঠান</button>
-            </div>
-        </div>
+<p>Website Loading...</p>
 
-        <div id="profile-tab" class="tab-content">
-            <div class="glass-card">
-                <h3 id="user-name">ABIR</h3>
-                <p id="user-id">NODE-ID: 6763447817</p>
-            </div>
-        </div>
+<script src="script.js"></script>
 
-        <div class="navbar">
-            <i class="fas fa-home" onclick="switchTab('home-tab')"></i>
-            <i class="fas fa-user-plus" onclick="switchTab('refer-tab')"></i>
-            <i class="fas fa-wallet" onclick="switchTab('withdraw-tab')"></i>
-            <i class="fas fa-user-cog" onclick="switchTab('profile-tab')"></i>
-        </div>
-    </div>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
