@@ -3,60 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refer Earn Zone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>TK Income</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
-        <div class="app-header">
-            <h2 class="app-title">Refer Earn Zone</h2>
-        </div>
         <div id="home-tab" class="tab-content active">
             <div class="glass-card">
-                <div class="balance-label">মোট ব্যালেন্স</div>
-                <div id="balance-amount" class="balance-amount">৳ ০.০০</div>
+                <p>TOTAL BALANCE</p>
+                <h2 id="balance-amount">৳0.00</h2>
             </div>
-            <div class="section-divider-title">স্পেশাল টাস্ক (৳৩৫)</div>
-            <button class="premium-gradient-btn" onclick="startTask('t1', 35, 'https://t.me/+-JhqvcZQxEY1YTI1')">সাপোর্ট গ্রুপ</button>
-            <button class="premium-gradient-btn" onclick="startTask('t2', 35, 'https://t.me/+GxE45tmJDgNjNDc1')">পেমেন্ট প্রুফ</button>
-            <div class="section-divider-title">অ্যাড স্লট (৳২৫)</div>
-            <button class="premium-gradient-btn" onclick="startTask('a1', 25, 'https://omg10.com/4/11131725')">অ্যাড স্লট ১</button>
-            <button class="premium-gradient-btn" onclick="startTask('a2', 25, 'https://omg10.com/4/11131822')">অ্যাড স্লট ২</button>
-            <div class="section-divider-title">ডেইলি টাস্ক (৳২৫)</div>
-            <button class="premium-gradient-btn" onclick="startTask('d1', 25, 'https://omg10.com/4/11131721')">টাস্ক ১</button>
-            <button class="premium-gradient-btn" onclick="startTask('d2', 25, 'https://omg10.com/4/11131722')">টাস্ক ২</button>
-            <button class="premium-gradient-btn" onclick="startTask('d3', 25, 'https://omg10.com/4/11131720')">টাস্ক ৩</button>
-            <button class="premium-gradient-btn" onclick="startTask('d4', 25, 'https://omg10.com/4/11131723')">টাস্ক ৪</button>
-            <button class="premium-gradient-btn" onclick="startTask('d5', 25, 'https://omg10.com/4/11131724')">টাস্ক ৫</button>
+            <div id="tasks-container"></div>
         </div>
 
         <div id="refer-tab" class="tab-content">
-            <h3>বন্ধুদের আমন্ত্রণ জানান</h3>
-            <p>প্রতি সফল রেফারে ৳১৫ বোনাস!</p>
-            <input type="text" id="refer-link-input" readonly>
-            <button onclick="copyReferLink()">কপি করুন</button>
-            <div id="referral-history-list"></div>
+            <div class="glass-card">
+                <h3>REFERRAL SYSTEM</h3>
+                <p><span id="total-joins">0</span> TOTAL JOINS</p>
+                <button class="btn-primary" onclick="copyReferLink()">লিংক কপি করুন</button>
+            </div>
         </div>
+
         <div id="withdraw-tab" class="tab-content">
-            <p style="color:red;">নোট: ১০টি রেফার ও নূন্যতম ৳৬০০ থাকতে হবে।</p>
-            <input type="number" id="withdraw-amount" placeholder="৳৬০০ বা বেশি">
-            <button onclick="requestWithdraw()">উত্তোলন অনুরোধ</button>
-            <div id="withdraw-history-list"></div>
+            <div class="glass-card">
+                <h3>PAYOUT DETAILS</h3>
+                <select id="method" class="input-field"><option>বিকাশ (Bkash)</option></select>
+                <input type="number" id="withdraw-amount" placeholder="পরিমাণ (৫০০+)" class="input-field">
+                <button class="btn-primary" onclick="requestWithdraw()">উইথড্র রিকোয়েস্ট পাঠান</button>
+            </div>
         </div>
 
         <div id="profile-tab" class="tab-content">
-            <h3>ইউজার প্রোফাইল</h3>
-            <p id="profile-name">নাম লোড হচ্ছে...</p>
-            <p id="profile-id">ID: লোড হচ্ছে...</p>
+            <div class="glass-card">
+                <h3 id="user-name">ABIR</h3>
+                <p id="user-id">NODE-ID: 6763447817</p>
+            </div>
         </div>
 
-        <div class="premium-navbar">
-            <div class="nav-button active" onclick="switchTab(0, 'home-tab')"><i class="fa-solid fa-house"></i><span>হোম</span></div>
-            <div class="nav-button" onclick="switchTab(1, 'refer-tab')"><i class="fa-solid fa-user-plus"></i><span>রেফার</span></div>
-            <div class="nav-button" onclick="switchTab(2, 'withdraw-tab')"><i class="fa-solid fa-wallet"></i><span>উত্তোলন</span></div>
-            <div class="nav-button" onclick="switchTab(3, 'profile-tab')"><i class="fa-solid fa-user"></i><span>প্রোফাইল</span></div>
+        <div class="navbar">
+            <i class="fas fa-home" onclick="switchTab('home-tab')"></i>
+            <i class="fas fa-user-plus" onclick="switchTab('refer-tab')"></i>
+            <i class="fas fa-wallet" onclick="switchTab('withdraw-tab')"></i>
+            <i class="fas fa-user-cog" onclick="switchTab('profile-tab')"></i>
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
