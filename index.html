@@ -3,33 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Earn Zone</title>
+<title>Refer Earn Zone</title>
 
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
+<!-- HOME PAGE -->
+<div id="home" class="page">
+
 <div class="header">
-    <h1>Earn Zone</h1><div class="balance-box">
-    ৳ <span id="balance">0</span>
+<h1>Earn Zone</h1>
+
+<div class="balance-box">
+৳ <span id="balance">0</span>
+</div>
 </div>
 
-</div><div class="profile-card">
-    <img src="https://i.imgur.com/8Km9tLL.png" class="profile-img"><h2 id="username">Loading...</h2>
+<div class="card">
+<h3>📢 Groups</h3>
 
-<p id="userid">Telegram ID</p>
-
-</div><div class="card">
-    <h3>📢 Groups</h3><a href="https://t.me/+GxE45tmJDgNjNDc1" target="_blank" class="btn">
-    Payment Group
+<a href="https://t.me/+GxE45tmJDgNjNDc1" target="_blank" class="btn">
+Payment Group
 </a>
 
 <a href="https://t.me/+-JhqvcZQxEY1YTI1" target="_blank" class="btn">
-    Support Group
+Support Group
 </a>
 
-</div><div class="card">
-    <h3>🎯 Tasks</h3><a href="https://omg10.com/4/11131721" target="_blank" class="btn">Task 1 (+25৳)</a>
+</div>
+
+<div class="card">
+<h3>🎯 Tasks</h3>
+
+<a href="https://omg10.com/4/11131721" target="_blank" class="btn">Task 1 (+25৳)</a>
 
 <a href="https://omg10.com/4/11131722" target="_blank" class="btn">Task 2 (+25৳)</a>
 
@@ -39,29 +47,123 @@
 
 <a href="https://omg10.com/4/11131724" target="_blank" class="btn">Task 5 (+25৳)</a>
 
-</div><div class="card">
-    <h3>📺 Ad Slots</h3><a href="https://omg10.com/4/11131725" target="_blank" class="btn">Ad Slot 1 (+35৳)</a>
+</div>
 
-<a href="https://omg10.com/4/11131822" target="_blank" class="btn">Ad Slot 2 (+35৳)</a>
+<div class="card">
+<h3>📺 Ad Slots</h3>
 
-</div><div class="card">
-    <h3>👥 Referral</h3><p id="refLink">Referral Link Loading...</p>
+<a href="https://omg10.com/4/11131725" target="_blank" class="btn">
+Ad Slot 1 (+35৳)
+</a>
 
-<button class="btn">Copy Referral Link</button>
+<a href="https://omg10.com/4/11131822" target="_blank" class="btn">
+Ad Slot 2 (+35৳)
+</a>
 
-</div><div class="card">
-    <h3>💸 Withdraw</h3><div class="notice">
-    ⚠️ Withdraw করতে হলে কমপক্ষে 10 Referral এবং ৳600 Balance থাকতে হবে।
+</div>
+
+</div>
+
+<!-- REFERRAL PAGE -->
+<div id="referral" class="page" style="display:none;">
+
+<div class="card">
+<h3>👥 Referral System</h3>
+
+<p id="refLink">
+Referral Link Loading...
+</p>
+
+<button id="copyBtn" class="btn">
+Copy Referral Link
+</button>
+
+<br><br>
+
+<h4>Total Referrals: 0</h4>
+
+</div>
+
+<div class="card">
+<h3>📜 Referral History</h3>
+
+<p>No Referral Yet</p>
+
+</div>
+
+</div>
+
+<!-- WITHDRAW PAGE -->
+<div id="withdraw" class="page" style="display:none;">
+
+<div class="card">
+
+<div class="notice">
+⚠️ Withdraw করতে হলে কমপক্ষে 10 Referral এবং ৳600 Balance থাকতে হবে।
 </div>
 
 <input type="text" placeholder="Bkash / Nagad Number">
 
 <input type="number" placeholder="Amount">
 
-<button class="btn">Submit Withdraw</button>
+<button class="btn">
+Submit Withdraw
+</button>
 
 </div>
-</body>
+
+<div class="card">
+
+<h3>💸 Withdraw History</h3>
+
+<p>No Withdraw Yet</p>
+
+</div>
+
+</div>
+
+<!-- PROFILE PAGE -->
+<div id="profile" class="page" style="display:none;">
+
+<div class="profile-card">
+
+<img src="https://i.imgur.com/8Km9tLL.png" class="profile-img">
+
+<h2 id="username">
+Loading...
+</h2>
+
+<p id="userid">
+Loading...
+</p>
+
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<button onclick="showPage('home')">
+🏠
+</button>
+
+<button onclick="showPage('referral')">
+👥
+</button>
+
+<button onclick="showPage('withdraw')">
+💳
+</button>
+
+<button onclick="showPage('profile')">
+👤
+</button>
+
+</div>
 
 <script type="module" src="script.js"></script>
+
+</body>
 </html>
