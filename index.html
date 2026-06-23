@@ -1,105 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Refer Earn Zone</title>
-
-<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<!-- HOME PAGE -->
 <div id="home" class="page">
 
-<div class="header">
-<h1>Earn Zone</h1>
+    <div class="top-card">
+        <h1>Refer Earn Zone</h1>
 
-<div class="balance-box">
-৳ <span id="balance">0</span>
+        <div class="balance-board">
+            <h2>৳ <span id="balance">0</span></h2>
+            <p>Current Balance</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📢 Official Groups</h3>
+
+        <a href="https://t.me/+GxE45tmJDgNjNDc1" target="_blank" class="btn">
+            Payment Group   (+35৳)
+        </a>
+
+        <a href="https://t.me/+-JhqvcZQxEY1YTI1" target="_blank" class="btn">
+            Support Group    (+35৳)
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>🎯 Tasks</h3>
+
+        <a href="https://omg10.com/4/11131721" target="_blank" class="btn">
+            Task 1 (+25৳)
+        </a>
+
+        <a href="https://omg10.com/4/11131722" target="_blank" class="btn">
+            Task 2 (+25৳)
+        </a>
+
+        <a href="https://omg10.com/4/11131720" target="_blank" class="btn">
+            Task 3 (+25৳)
+        </a>
+
+        <a href="https://omg10.com/4/11131723" target="_blank" class="btn">
+            Task 4 (+25৳)
+        </a>
+
+        <a href="https://omg10.com/4/11131724" target="_blank" class="btn">
+            Task 5 (+25৳)
+        </a>
+    </div>
+
+    <div class="card">
+        <h3>📺 Ad Slots</h3>
+
+        <a href="https://omg10.com/4/11131725" target="_blank" class="btn">
+            Ad Slot 1 (+35৳)
+        </a>
+
+        <a href="https://omg10.com/4/11131822" target="_blank" class="btn">
+            Ad Slot 2 (+35৳)
+        </a>
+    </div>
+
 </div>
-</div>
-
-<div class="card">
-<h3>📢 Groups</h3>
-
-<a href="https://t.me/+GxE45tmJDgNjNDc1" target="_blank" class="btn">
-Payment Group
-</a>
-
-<a href="https://t.me/+-JhqvcZQxEY1YTI1" target="_blank" class="btn">
-Support Group
-</a>
-
-</div>
-
-<div class="card">
-<h3>🎯 Tasks</h3>
-
-<a href="https://omg10.com/4/11131721" target="_blank" class="btn">Task 1 (+25৳)</a>
-
-<a href="https://omg10.com/4/11131722" target="_blank" class="btn">Task 2 (+25৳)</a>
-
-<a href="https://omg10.com/4/11131720" target="_blank" class="btn">Task 3 (+25৳)</a>
-
-<a href="https://omg10.com/4/11131723" target="_blank" class="btn">Task 4 (+25৳)</a>
-
-<a href="https://omg10.com/4/11131724" target="_blank" class="btn">Task 5 (+25৳)</a>
-
-</div>
-
-<div class="card">
-<h3>📺 Ad Slots</h3>
-
-<a href="https://omg10.com/4/11131725" target="_blank" class="btn">
-Ad Slot 1 (+35৳)
-</a>
-
-<a href="https://omg10.com/4/11131822" target="_blank" class="btn">
-Ad Slot 2 (+35৳)
-</a>
-
-</div>
-
-</div>
-
 <!-- REFERRAL PAGE -->
+
 <div id="referral" class="page" style="display:none;">
 
 <div class="card">
 <h3>👥 Referral System</h3>
 
 <p id="refLink">
-Referral Link Loading...
+Loading Referral Link...
 </p>
 
 <button id="copyBtn" class="btn">
 Copy Referral Link
 </button>
 
-<br><br>
-
-<h4>Total Referrals: 0</h4>
+<h4>Total Referrals: <span id="refCount">0</span></h4>
 
 </div>
 
 <div class="card">
 <h3>📜 Referral History</h3>
 
-<p>No Referral Yet</p>
+<div id="refHistory">
+No Referral Yet
+</div>
 
 </div>
 
 </div>
 
 <!-- WITHDRAW PAGE -->
+
 <div id="withdraw" class="page" style="display:none;">
 
 <div class="card">
 
+<h3>💳 Withdraw</h3>
+
 <div class="notice">
-⚠️ Withdraw করতে হলে কমপক্ষে 10 Referral এবং ৳600 Balance থাকতে হবে।
+⚠️ Minimum 10 Referrals & ৳600 Balance Required
 </div>
 
 <input type="text" placeholder="Bkash / Nagad Number">
@@ -114,15 +112,18 @@ Submit Withdraw
 
 <div class="card">
 
-<h3>💸 Withdraw History</h3>
+<h3>📋 Withdraw History</h3>
 
-<p>No Withdraw Yet</p>
+<div id="withdrawHistory">
+No Withdraw Yet
+</div>
 
 </div>
 
 </div>
 
 <!-- PROFILE PAGE -->
+
 <div id="profile" class="page" style="display:none;">
 
 <div class="profile-card">
@@ -137,11 +138,15 @@ Loading...
 Loading...
 </p>
 
-</div>
+<h3>
+Balance: ৳<span id="profileBalance">0</span>
+</h3>
 
 </div>
 
-<!-- BOTTOM NAV -->
+</div>
+
+<!-- BOTTOM NAVIGATION -->
 
 <div class="bottom-nav">
 
@@ -162,8 +167,3 @@ Loading...
 </button>
 
 </div>
-
-<script type="module" src="script.js"></script>
-
-</body>
-</html>
